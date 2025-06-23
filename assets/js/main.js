@@ -63,7 +63,7 @@
         new WOW().init();
 
         //>> Nice Select Start <<//
-        $('select').niceSelect();
+       // $('select').niceSelect();
 
         //>> Scrolldown Start <<//
         $("#scrollDown").on("click", function () {

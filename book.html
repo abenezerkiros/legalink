@@ -252,124 +252,100 @@
  
         
          <!-- Breadcrumb-wrapper Start -->
-        <section class="breadcrumb-wrapper fix bg-cover" style="background-image: url(assets/img/breadcrumb/bg.webp);">
-            <div class="container">
-                <div class="row">
-                    <div class="page-heading">
-                        <h2 class="wow fadeInUp" data-wow-delay=".3s">Contact Us</h2>
-                        <ul class="breadcrumb-list wow fadeInUp" data-wow-delay=".5s">
-                            <li>
-                                <a href="index.html">Home</a>
-                            </li>
-                            <li><i class="fa-solid fa-chevrons-right"></i></li>
-                            <li>Contact Us</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
+   
 
         <!-- appointment Section Start -->
-        <section class="appointment-section section-padding fix">
+        <section class="appointment-section fix">
             <div class="container">
                 <div class="appointment-wrapper">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="appointment-content">
-                                <div class="section-title">
-                                    <span class="sub-title wow fadeInUp">
-                                        Our Promise
-                                    </span>
-                                    <h2 class="wow fadeInUp" data-wow-delay=".3s">
-                                        Why Clients Choose Us
-                                    </h2>
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8"> <!-- Increased width from col-lg-6 to col-lg-8 -->
+                            <div style="max-width: 800px; margin: 0 auto; padding: 32px; font-family: sans-serif;">
+                                <h3 style="color: #0056a4;">CALCULATE SLIP & FALL COMPENSATION</h3>
+                                <p style="font-weight: 500;">We’ll send you the estimated value of your injury claim and suggested next steps.</p>
+                                <p style="color: #0071c2; font-weight: bold;">It’s completely free with no cost or commitment.</p>
+                              
+                                <!-- Progress bar -->
+                                <div style="background-color: #ccc; border-radius: 20px; height: 20px; margin-bottom: 24px;">
+                                  <div style="width: 66%; background-color: #0056a4; height: 100%; border-radius: 20px;"></div>
                                 </div>
-                                <p class="wow fadeInUp" data-wow-delay=".5s">
-                                    Trusted by individuals and businesses across the region, we offer reliable referrals and unmatched legal insight through a seamless and supportive experience.
-                                </p>
-                                <div class="appointment-area">
-                                    <div class="appointment-item wow fadeInUp" data-wow-delay=".3s">
-                         
-                                        <div class="content">
-                                            <h4>Trusted Referrals</h4>
-                                            <p>
-                                                We connect you to experienced lawyers based on your unique needs and legal situation.
-                                            </p>
-                                        </div>
+                              
+                                <form>
+                                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                              
+                                    <!-- Date of Incident -->
+                                    <div>
+                                      <label>Date of Incident:</label><br>
+                               <input type="date" style="width: 100%; padding: 8px; color: black;"/>
                                     </div>
-                                    <div class="appointment-item wow fadeInUp" data-wow-delay=".5s">
-                                
-                                        <div class="content">
-                                            <h4>Proven Satisfaction</h4>
-                                            <p>
-                                                Over 500 happy clients and growing — we help people find the legal support they truly need.
-                                            </p>
-                                        </div>
+                              
+                                    <!-- State and City -->
+                                    <div>
+                                      <label>State where the injury occurred:</label><br>
+                                      <input type="text" required style="width: 100%; padding: 8px; color: black;">
+                                      <label style="margin-top: 8px;">City where the injury occurred:</label>
+                                      <input type="text" required style="width: 100%; padding: 8px; color: black;">
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="contact-content">
-                                <span class="wow fadeInUp" data-wow-delay=".3s">Need Legal Guidance?</span>
-                                <h3 class="wow fadeInUp" data-wow-delay=".5s">
-                                    Get Referred Today
-                                </h3>
-                                <form id="contact-form" class="contact-form-items">
-                                    <div class="row g-4">
-                                      <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s">
-                                        <div class="form-clt">
-                                          <input type="text" name="first_name" id="first_name" placeholder="First Name" required>
-                                        </div>
-                                      </div>
-                                      <div class="col-lg-6 wow fadeInUp" data-wow-delay=".5s">
-                                        <div class="form-clt">
-                                          <input type="text" name="last_name" id="last_name" placeholder="Last Name" required>
-                                        </div>
-                                      </div>
-                                      <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s">
-                                        <div class="form-clt">
-                                          <input type="email" name="email" id="email" placeholder="Email Address" required>
-                                        </div>
-                                      </div>
-                                      <div class="col-lg-6 wow fadeInUp" data-wow-delay=".5s">
-                                        <div class="form-clt">
-                                          <input type="tel" name="phone" id="phone" placeholder="Phone Number">
-                                        </div>
-                                      </div>
-                                      <div class="col-lg-12 wow fadeInUp" data-wow-delay=".3s">
-                                        <div class="form-clt">
-                                          <input type="text" name="legal_need" id="legal_need" placeholder="Legal Issue (e.g. Family, Criminal, Immigration)">
-                                        </div>
-                                      </div>
-                                      <div class="col-lg-12 wow fadeInUp" data-wow-delay=".3s">
-                                        <div class="form-clt">
-                                          <textarea name="message" id="message" placeholder="Brief Description of Your Situation"></textarea>
-                                        </div>
-                                      </div>
-                                      <div class="col-lg-12 wow fadeInUp" data-wow-delay=".5s">
-                                        <button type="submit" class="theme-btn">
-                                          Get Started <i class="fa-solid fa-arrow-right"></i>
-                                        </button>
-                                      </div>
+                              
+                                    <!-- Lost Wages -->
+                                    <div>
+                                      <label>Have you lost wages or suffered medical bills due to the injury?</label><br>
+                                      <button type="button" class="yn-btn">No</button>
+                                      <button type="button" class="yn-btn">Yes</button>
                                     </div>
-                                  </form>
+                              
+                                    <!-- Attorney -->
+                                    <div>
+                                      <label>Is an attorney helping you with your case?</label><br>
+                                      <button type="button" class="yn-btn">No</button>
+                                      <button type="button" class="yn-btn">Yes</button>
+                                    </div>
+                              
+                                    <!-- Missed work -->
+                                    <div>
+                                      <label>Did the injury cause you to miss more than 5 days of full-time work?</label><br>
+                                      <button type="button" class="yn-btn">No</button>
+                                      <button type="button" class="yn-btn">Yes</button>
+                                    </div>
+                              
+                                    <!-- Employer notified -->
+                                    <div>
+                                      <label>Did you notify your employer?</label><br>
+                                      <button type="button" class="yn-btn">No</button>
+                                      <button type="button" class="yn-btn">Yes</button>
+                                    </div>
+                              
+                                    <!-- Federal employee -->
+                                    <div>
+                                      <label>Are you a Federal Employee?</label><br>
+                                      <button type="button" class="yn-btn">No</button>
+                                      <button type="button" class="yn-btn">Yes</button>
+                                    </div>
+            
+                                    <!-- Injury description -->
+                                    <div style="grid-column: span 2;">
+                                      <label>Please describe your injuries:</label><br>
+                                      <textarea required style="width: 100%; height: 100px; padding: 8px;" placeholder="Describe with your words..."></textarea>
+                                    </div>
+                                  </div>
+                      
                                   
-                            </div>
+                              
+                                  <div style="text-align: right; margin-top: 24px;">
+                                    <button type="submit" style="background-color: red; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 4px;">
+                                      Continue
+                                    </button>
+                                  </div>
+                                </form>
+                              </div>
                         </div>
-                    </div>
+                      </div>
                 </div>
             </div>
         </section>
 
         <!-- Map-section Start -->
-        <div class="map-section">
-            <div class="map-items">
-                <div class="googpemap">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27880.120519180633!2d-118.39021253477225!3d34.08718328117431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2bed921f033e3%3A0x50e44c2d0e8a26a7!2sWest%20Hollywood%2C%20CA%2C%20USA!5e1!3m2!1sen!2set!4v1748469823765!5m2!1sen!2set" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-                </div>
-            </div>
-        </div>
+    
        
         <!-- Footer-section Start -->
         <section class="footer-section fix bg-cover" style="background-image: url(assets/img/footer/bg.webp);">
@@ -537,7 +513,30 @@
               });
             });
           </script>
-          
+          <script>
+            // Optional toggle behavior
+            document.querySelectorAll('.yn-btn').forEach(btn => {
+              btn.addEventListener('click', () => {
+                const group = btn.parentElement;
+                group.querySelectorAll('.yn-btn').forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+              });
+            });
+          </script>
+          <style>
+            .yn-btn {
+              background: #e6e6e6;
+              border: none;
+              padding: 10px 20px;
+              margin: 4px 4px 4px 0;
+              border-radius: 4px;
+              cursor: pointer;
+            }
+            .yn-btn.selected {
+              background-color: #0056a4;
+ 
+            }
+          </style>
         <!--<< All JS Plugins >>-->
         <script src="assets/js/jquery-3.7.1.min.js"></script>
         <!--<< Viewport Js >>-->

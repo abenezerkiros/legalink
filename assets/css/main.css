@@ -3128,7 +3128,7 @@ span {
 }
 
 .fix {
-  overflow: hidden;
+  overflow: visible;
 }
 
 .ralt {

@@ -134,12 +134,7 @@
                             <div class="header-button mt-4">
                                 <a href="contact.html" class="theme-btn"> Get Matched Now <i class="fa-sharp fa-regular fa-arrow-right"></i></a>
                             </div>
-                            <div class="social-icon d-flex align-items-center">
-                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-youtube"></i></a>
-                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            </div>
+                       
                         </div>
                     </div>
                 </div>
@@ -165,12 +160,7 @@
                             </li>
                         </ul>
                         <div class="top-right">
-                            <div class="social-icon">
-                                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                                <a href="#"><i class="fab fa-twitter"></i></a>
-                                <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                                <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                            </div>
+                         
                         </div>
                     </div>
                 </div>
@@ -255,44 +245,63 @@
                     <div class="booking__wrapper bg--section-color" data-aos="fade-up-left" data-aos-duration="1000">
                       <div class="row">
                         <div class="col-12">
-                          <form id="contact-form" class="booking__form">
-                            <div class="row g-4">
-                              <div class="col-12">
-                                <div class="booking__form-inputgroup">
-                                  <div class="booking__form-date">
-                                    <input type="text"  name="first_name" id="first_name" class="date-input form-control" placeholder="Name">
+                            <form id="contact-form" onsubmit="handleFormSubmit(event)"class="booking__form" style="position: relative; overflow: visible; z-index: 10;">
+                                <div class="row g-4">
+                              
+                                  <!-- Dropdown for Legal Issue -->
+                                  <div class="col-12">
+                                    <div class="booking__form-inputgroup" style="position: relative; overflow: visible; z-index: 10;">
+                                      <div class="booking__form-date" style="position: relative; overflow: visible; z-index: 99999;">
+                                        
+                                        <select name="legal_need" id="legal_need" class=" form-control" onchange="toggleOtherInput(this)" style="width: 100%; z-index: 999999;">
+                                        <option value="" disabled selected>Select Legal Issue</option>
+                                        <option value="auto">Auto Accident</option>
+                                        <option value="motorcycle">Motorcycle Accident</option>
+                                        <option value="truck">Truck Accident</option>
+                                        <option value="mass">Mass Transit</option>
+                                        <option value="work">Work Accident</option>
+                                        <option value="dog">Dog Bite</option>
+                                        <option value="slip">Slip & Fall</option>
+                                        <option value="medical">Medical Malpractice</option>
+                                        <option value="asbestos">Asbestos / Mesothelioma</option>
+                                        <option value="nursing">Nursing Home Abuse</option>
+                                        <option value="mash">Transvaginal Mesh</option>
+                                        <option value="palsy">Cerebral Palsy</option>
+                                        <option value="birth">Birth Defect</option>
+                                        <option value="product">Product Liability</option>
+                                        <option value="others">Others</option>
+                                        </select>
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                              </div>
-                              <div class="col-12">
-                                <div class="booking__form-inputgroup">
-                                  <div class="booking__form-date">
-                                    <input type="email"  name="email" id="email" class="date-input form-control" placeholder="Email">
+                              
+                                  <!-- Optional input shown if "Others" selected -->
+                                  <div class="col-12" id="other-issue-container" style="display: none;">
+                                    <div class="booking__form-inputgroup">
+                                      <div class="booking__form-date">
+                                        <input type="text" name="other_legal_need" id="other_legal_need" class="date-input form-control" placeholder="Please specify">
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                              </div>
-                              <div class="col-12">
-                                <div class="booking__form-inputgroup">
-                                  <div class="booking__form-date">
-                                    <input type="text" name="legal_need" id="legal_need" class="date-input form-control" placeholder="Legal Issue (e.g. Family, Criminal, Immigration)">
+                              
+                                  <!-- Zip Code -->
+                                  <div class="col-12">
+                                    <div class="booking__form-inputgroup">
+                                      <div class="booking__form-date">
+                                        <input type="text" name="zip_code" id="zip_code" class="date-input form-control" placeholder="ZIP Code">
+                                      </div>
+                                    </div>
                                   </div>
-                                </div>
-                              </div>
-                              <div class="col-12">
-                                <div class="booking__form-inputgroup">
-                                  <div class="booking__form-date">
-                                    <input type="text" name="message" id="message" class="date-input form-control" placeholder="Brief Discription">
+                              
+                                  <!-- Submit Button -->
+                                  <div class="col-12">
+                                    <div class="booking__form-btn">
+                                      <button type="submit" class="custom-btn custom-btn--fluid"><span>Get Matched Now</span></button>
+                                    </div>
                                   </div>
+                              
                                 </div>
-                              </div>
-                       
-                              <div class="col-12">
-                                <div class="booking__form-btn">
-                                  <button type="submit" class="custom-btn custom-btn--fluid"><span>Get Matched Now</span></button>
-                                </div>
-                              </div>
-                            </div>
-                          </form>
+                              </form>
                         </div>
                       </div>
                     </div>
@@ -819,12 +828,7 @@
                                     <p>
                                         LegalLink360 helps you connect with trusted attorneys for any legal need — simple, fast, and free of stress.
                                     </p>
-                                    <div class="social-icon">
-                                        <a><i class="fab fa-facebook-f"></i></a>
-                                        <a><i class="fab fa-twitter"></i></a>
-                                        <a><i class="fab fa-linkedin-in"></i></a>
-                                        <a><i class="fa-brands fa-instagram"></i></a>
-                                    </div>
+                            
                                 </div>
                             </div>
                         </div>
@@ -940,33 +944,50 @@
               });
             });
           </script>
-        <script>
-            document.getElementById("contact-form").addEventListener("submit", function (e) {
-              e.preventDefault();
+     
+   <script>
+    function handleFormSubmit(e) {
+      e.preventDefault(); // Stop default form submission
+  
+      const zip = document.getElementById('zip_code').value.trim();
+      const legalNeed = document.getElementById('legal_need').value;
+  
+      if (!zip || !legalNeed) {
+        alert('Please fill out both fields.');
+        return;
+      }
+  
+      // Define your redirect routes here
+      const routes = {
+        auto: 'auto.html',
+        motorcycle: 'motorcycle.html',
+        truck: 'truck.html',
+        work: 'work.html',
+        dog: 'dog.html',
+        slip: 'book.html',
+        medical: 'malpractice.html',
+        asbestos: 'asbestos.html',
+        nursing: 'nursing.html',
+        mash: 'mash.html',
+        product: 'product.html',
+        birth: "birth.html",
+        palsy:"palsy.html",
+        others: 'other.html',
+        mass: "mass.html"
+      };
+  
+      const route = routes[legalNeed] || routes['others'];
+  
+      // Redirect with query parameters
+      window.location.href = `${route}?zip=${encodeURIComponent(zip)}&issue=${encodeURIComponent(legalNeed)}`;
+    }
+  </script>
           
-              const data = {
-                first_name: document.getElementById("first_name").value,
-
-                email: document.getElementById("email").value,
-
-                legal_need: document.getElementById("legal_need").value,
-                message: document.getElementById("message").value
-              };
-          
-              fetch("https://services.leadconnectorhq.com/hooks/pSqXKmlsGJfVWsxWt9iS/webhook-trigger/a6955d1e-61bd-4f5e-8f21-c5d4337b536a", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-              })
-              .then(res => {
-                if (res.ok) {
-                  alert("Form submitted successfully!");
-                  document.getElementById("contact-form").reset();
-                } else {
-                  alert("Submission failed. Please try again.");
-                }
-              });
-            });
+          <script>
+            function toggleOtherInput(select) {
+              const otherContainer = document.getElementById('other-issue-container');
+              otherContainer.style.display = select.value === 'Others' ? 'block' : 'none';
+            }
           </script>
           
     </body>

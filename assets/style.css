@@ -1191,13 +1191,13 @@ div[class*=kursorChild].kursorChild:after {
   font-family: inherit;
   font-size: 16px;
   font-weight: normal;
-  height: 56px;
   line-height: 40px;
   outline: none;
   padding-left: 24px;
   padding-right: 36px;
   position: relative;
   text-align: left !important;
+  overflow: visible !important;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -ms-transition: all 0.2s ease-in-out;
