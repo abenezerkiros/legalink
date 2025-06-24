@@ -269,68 +269,65 @@
                                   <div style="width: 66%; background-color: #0056a4; height: 100%; border-radius: 20px;"></div>
                                 </div>
                               
-                                <form>
-                                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                              
-                                    <!-- Date of Incident -->
-                                    <div>
-                                      <label>Date of Incident:</label><br>
-                               <input type="date" style="width: 100%; padding: 8px; color: black;"/>
-                                    </div>
-                              
-                                    <!-- State and City -->
-                                    <div>
-                                      <label>State where the injury occurred:</label><br>
-                                      <input type="text" required style="width: 100%; padding: 8px; color: black;">
-
-                                      <label style="margin-top: 8px;">City where the injury occurred:</label>
-                                      <input type="text" required style="width: 100%; padding: 8px; color: black;">
-                                    </div>
-                                    <div>
-                                      <label>
-                                        Have you been diagnosed by a doctor?</label><br>
-                                      <button type="button" class="yn-btn">No</button>
-                                      <button type="button" class="yn-btn">Yes</button>
-                                    </div>
-                                    <!-- Lost Wages -->
-                              
-                              
-                                    <!-- Attorney -->
-                                    <div>
-                                      <label>Is an attorney helping you with your case?</label><br>
-                                      <button type="button" class="yn-btn">No</button>
-                                      <button type="button" class="yn-btn">Yes</button>
-                                    </div>
-                              
-
-                              
-                                    <!-- Employer notified -->
-                                    <div>
-                                      <label>Estimated Medical Bills</label><br>
-                                      <input type="text" required style="width: 100%; padding: 8px; color: black;">
-
-                                    </div>
-                         
-  
-                               
-                              
-
-                
-                                    <!-- Injury description -->
-                                    <div style="grid-column: span 2;">
-                                      <label>Please describe your injuries:</label><br>
-                                      <textarea required style="width: 100%; height: 100px; padding: 8px;" placeholder="Describe with your words..."></textarea>
-                                    </div>
-                                  </div>
-                      
+                                <form id="contact-form">
+                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                                   
-                              
-                                  <div style="text-align: right; margin-top: 24px;">
-                                    <button type="submit" style="background-color: red; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 4px;">
-                                      Continue
-                                    </button>
-                                  </div>
-                                </form>
+                                      <!-- Date of Incident -->
+                                      <div>
+                                        <label>Date of Incident:</label><br>
+                                        <input type="date" name="date_of_incident" id="date_of_incident" style="width: 100%; padding: 8px; color: black;" required>
+                                      </div>
+                                  
+                                      <!-- Name + Email -->
+                                      <div>
+                                        <label>Name</label><br>
+                                        <input type="text" name="name" id="name" style="width: 100%; padding: 8px; color: black;" required>
+                                        <label>Email</label><br>
+                                        <input type="email" name="email" id="email" style="width: 100%; padding: 8px; color: black;" required>
+                                      </div>
+                                  
+                                      <!-- State and City -->
+                                      <div>
+                                        <label>State where the injury occurred:</label><br>
+                                        <input type="text" name="state" id="state" style="width: 100%; padding: 8px; color: black;" required>
+                                        <label style="margin-top: 8px;">City where the injury occurred:</label>
+                                        <input type="text" name="city" id="city" style="width: 100%; padding: 8px; color: black;" required>
+                                      </div>
+                                  
+                                      <!-- Diagnosed by Doctor -->
+                                      <div data-group="diagnosed_by_doctor">
+                                        <label>Have you been diagnosed by a doctor?</label><br>
+                                        <button type="button" class="yn-btn" data-name="diagnosed_by_doctor" data-value="No">No</button>
+                                        <button type="button" class="yn-btn" data-name="diagnosed_by_doctor" data-value="Yes">Yes</button>
+                                      </div>
+                                  
+                                      <!-- Attorney -->
+                                      <div data-group="attorney_helping">
+                                        <label>Is an attorney helping you with your case?</label><br>
+                                        <button type="button" class="yn-btn" data-name="attorney_helping" data-value="No">No</button>
+                                        <button type="button" class="yn-btn" data-name="attorney_helping" data-value="Yes">Yes</button>
+                                      </div>
+                                  
+                                      <!-- Medical Bills -->
+                                      <div>
+                                        <label>Estimated Medical Bills</label><br>
+                                        <input type="text" name="estimated_medical_bills" id="estimated_medical_bills" style="width: 100%; padding: 8px; color: black;" required>
+                                      </div>
+                                  
+                                      <!-- Injury Description -->
+                                      <div style="grid-column: span 2;">
+                                        <label>Please describe your injuries:</label><br>
+                                        <textarea name="injury_description" id="injury_description" style="width: 100%; height: 100px; padding: 8px;" placeholder="Describe with your words..." required></textarea>
+                                      </div>
+                                    </div>
+                                  
+                                    <div style="text-align: right; margin-top: 24px;">
+                                      <button type="submit" style="background-color: red; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 4px;">
+                                        Continue
+                                      </button>
+                                    </div>
+                                  </form>
+                                  
                               </div>
                         </div>
                       </div>
@@ -456,34 +453,7 @@
                 </div>
             </div>
         </section>
-        <script>
-            document.getElementById("contact-form").addEventListener("submit", function (e) {
-              e.preventDefault();
-          
-              const data = {
-                first_name: document.getElementById("first_name").value,
-                last_name: document.getElementById("last_name").value,
-                email: document.getElementById("email").value,
-                phone: document.getElementById("phone").value,
-                legal_need: document.getElementById("legal_need").value,
-                message: document.getElementById("message").value
-              };
-          
-              fetch("https://services.leadconnectorhq.com/hooks/pSqXKmlsGJfVWsxWt9iS/webhook-trigger/a6955d1e-61bd-4f5e-8f21-c5d4337b536a", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-              })
-              .then(res => {
-                if (res.ok) {
-                  alert("Form submitted successfully!");
-                  document.getElementById("contact-form").reset();
-                } else {
-                  alert("Submission failed. Please try again.");
-                }
-              });
-            });
-          </script>
+
           <script>
             document.getElementById("subscribe-form").addEventListener("submit", function (e) {
               e.preventDefault();
@@ -507,16 +477,90 @@
               });
             });
           </script>
-          <script>
-            // Optional toggle behavior
-            document.querySelectorAll('.yn-btn').forEach(btn => {
-              btn.addEventListener('click', () => {
-                const group = btn.parentElement;
-                group.querySelectorAll('.yn-btn').forEach(b => b.classList.remove('selected'));
-                btn.classList.add('selected');
-              });
-            });
-          </script>
+<script>
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+  
+      // Helper to safely get value or empty string
+      const getVal = (id) => {
+        const el = document.getElementById(id);
+        return el ? el.value : "";
+      };
+  
+      const getSelectedYN = (groupLabel) => {
+        const group = document.querySelector(`[data-group="${groupLabel}"]`);
+        if (!group) return "";
+        const selected = group.querySelector(".yn-btn.selected");
+        return selected ? selected.textContent.trim() : "";
+      };
+  
+      const getCheckedInjuryTypes = () => {
+        const checkboxes = document.querySelectorAll('[name="injury_type[]"]:checked');
+        return Array.from(checkboxes).map(cb => cb.nextElementSibling?.textContent?.trim() || "").join(", ");
+      };
+      const urlParams = new URLSearchParams(window.location.search);
+      const zipCode = urlParams.get('zip');
+      const issue = urlParams.get('issue');
+      const data = {
+        first_name: getVal("name"),
+        last_name: getVal("last_name"),
+        email: getVal("email"),
+        phone: getVal("phone"),
+        zip: zipCode,
+        city: getVal("city"),
+        state: getVal("state"),
+  
+        "customField.date_of_incident": getVal("date_of_incident"),
+        "customField.injury_description": getVal("injury_description") || getVal("message"),
+        "customField.estimated_medical_bills": getVal("estimated_medical_bills"),
+        "customField.estimated_severity": getVal("estimated_severity"),
+        "customField.victim_relation": getVal("victim_relation"),
+        "customField.injury_types": getCheckedInjuryTypes(),
+  
+        "customField.attorney_helping": getSelectedYN("attorney_helping"),
+        "customField.employer_notified": getSelectedYN("employer_notified"),
+        "customField.federal_employee": getSelectedYN("federal_employee"),
+        "customField.hospitalization_due_to_accident": getSelectedYN("hospitalized_from_accident"),
+        "customField.can_identify_animal_owner": getSelectedYN("animal_owner_identifiable"),
+        "customField.lost_wages_or_medical_bills": getSelectedYN("lost_wages"),
+        "customField.missed_5_days_work": getSelectedYN("missed_work"),
+        "customField.injured_or_in_pain": getSelectedYN("injured_or_in_pain"),
+        "customField.insurance_coverage": getSelectedYN("insurance_coverage"),
+        "customField.your_fault_or_ticketed": getSelectedYN("at_fault_or_ticketed"),
+        "customField.hospitalized": getSelectedYN("hospitalized"),
+        "customField.nursing_home_injury": getSelectedYN("nursing_home_injury"),
+        "customField.diagnosed_by_doctor": getSelectedYN("diagnosed_by_doctor"),
+        "customField.legal_issue": issue,
+        "customField.other_legal_issue": getVal("other_legal_need")
+      };
+       console.log(data)
+      fetch("https://services.leadconnectorhq.com/hooks/pSqXKmlsGJfVWsxWt9iS/webhook-trigger/a6955d1e-61bd-4f5e-8f21-c5d4337b536a", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+      .then(res => {
+        if (res.ok) {
+          alert("Form submitted successfully!");
+          document.getElementById("contact-form").reset();
+          // Optionally redirect
+          // window.location.href = "thank-you.html";
+        } else {
+          alert("Submission failed. Please try again.");
+        }
+      })
+      .catch(() => alert("An error occurred. Please try again."));
+    });
+  </script>
+      <script>
+        document.querySelectorAll(".yn-btn").forEach((btn) => {
+          btn.addEventListener("click", () => {
+            const group = btn.parentElement;
+            group.querySelectorAll(".yn-btn").forEach((b) => b.classList.remove("selected"));
+            btn.classList.add("selected");
+          });
+        });
+      </script>
           <style>
             .yn-btn {
               background: #e6e6e6;

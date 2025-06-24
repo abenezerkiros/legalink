@@ -264,104 +264,105 @@
                                   <div style="width: 66%; background-color: #0056a4; height: 100%; border-radius: 20px;"></div>
                                 </div>
                               
-                                <form>
+                                <form id="contact-form">
                                   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                              
+                                
                                     <!-- Date of Incident -->
                                     <div>
                                       <label>Date of Incident:</label><br>
-                               <input type="date" style="width: 100%; padding: 8px; color: black;"/>
+                                      <input type="date" name="customField.date_of_incident" id="date_of_incident" required style="width: 100%; padding: 8px; color: black;">
                                     </div>
-                              
-                                    <!-- State and City -->
+                                
+                                    <!-- Name & Email -->
+                                    <div>
+                                      <label>Name</label><br>
+                                      <input type="text" name="name" id="name" required style="width: 100%; padding: 8px; color: black;">
+                                      <label>Email</label><br>
+                                      <input type="email" name="email" id="email" required style="width: 100%; padding: 8px; color: black;">
+                                    </div>
+                                
+                                    <!-- State & City -->
                                     <div>
                                       <label>State where the injury occurred:</label><br>
-                                      <input type="text" required style="width: 100%; padding: 8px; color: black;">
-
+                                      <input type="text" name="customField.injury_state" id="injury_state" required style="width: 100%; padding: 8px; color: black;">
                                       <label style="margin-top: 8px;">City where the injury occurred:</label>
-                                      <input type="text" required style="width: 100%; padding: 8px; color: black;">
+                                      <input type="text" name="customField.injury_city" id="injury_city" required style="width: 100%; padding: 8px; color: black;">
                                     </div>
-                                    <div>
-                                      <label>
-                                        Did the accident cause hospitalization, medical treatment, surgery, or missed work?</label><br>
-                                      <button type="button" class="yn-btn">No</button>
-                                      <button type="button" class="yn-btn">Yes</button>
+                                
+                                    <!-- Hospitalization/Medical/Surgery -->
+                                    <div data-group="customField.caused_medical_attention">
+                                      <label>Did the accident cause hospitalization, medical treatment, surgery, or missed work?</label><br>
+                                      <button type="button" class="yn-btn" data-name="customField.caused_medical_attention" data-value="No">No</button>
+                                      <button type="button" class="yn-btn" data-name="customField.caused_medical_attention" data-value="Yes">Yes</button>
                                     </div>
-                                    <!-- Lost Wages -->
-                              
-                              
+                                
                                     <!-- Attorney -->
-                                    <div>
+                                    <div data-group="customField.attorney_helping">
                                       <label>Is an attorney helping you with your case?</label><br>
-                                      <button type="button" class="yn-btn">No</button>
-                                      <button type="button" class="yn-btn">Yes</button>
+                                      <button type="button" class="yn-btn" data-name="customField.attorney_helping" data-value="No">No</button>
+                                      <button type="button" class="yn-btn" data-name="customField.attorney_helping" data-value="Yes">Yes</button>
                                     </div>
-                              
-
-                              
-                                    <!-- Employer notified -->
+                                
+                                    <!-- Medical Bills -->
                                     <div>
                                       <label>Estimated Medical Bills</label><br>
-                                      <input type="text" required style="width: 100%; padding: 8px; color: black;">
-
+                                      <input type="text" name="customField.estimated_medical_bills" id="estimated_medical_bills" required style="width: 100%; padding: 8px; color: black;">
                                     </div>
-                         
+                                
+                                    <!-- Severity -->
                                     <div>
-                                        <label>Estimated severity of injury</label><br>
-                                        <select required style="width: 100%; padding: 8px;color: black;"><option value="">No injury</option><option value="">Minor injury</option><option value="">Disfigurement or cosmetic injury</option><option value="">Short term loss of physical ability</option><option value="">Long term loss of physical injury</option><option value="">Possibility of future harm</option><option value="">Death of patient</option></select>
-
-                                      </div>  
-                               
-                              
-
+                                      <label>Estimated severity of injury</label><br>
+                                      <select name="customField.estimated_severity" id="estimated_severity" required style="width: 100%; padding: 8px;color: black;">
+                                        <option value="">Select</option>
+                                        <option value="No injury">No injury</option>
+                                        <option value="Minor injury">Minor injury</option>
+                                        <option value="Disfigurement or cosmetic injury">Disfigurement or cosmetic injury</option>
+                                        <option value="Short term loss of physical ability">Short term loss of physical ability</option>
+                                        <option value="Long term loss of physical injury">Long term loss of physical injury</option>
+                                        <option value="Possibility of future harm">Possibility of future harm</option>
+                                        <option value="Death of patient">Death of patient</option>
+                                      </select>
+                                    </div>
+                                
+                                    <!-- Injury Types -->
                                     <div style="font-family: sans-serif; margin-bottom: 20px;">
-                                        <label style="font-weight: bold; color: #0056a4; font-size: 16px;">
-                                          What types of injuries were sustained?
+                                      <label style="font-weight: bold; color: #0056a4; font-size: 16px;">What types of injuries were sustained?</label>
+                                      <div style="color: #0056a4; font-size: 14px; margin-bottom: 12px;">(Please check all that apply)</div>
+                                      <div id="injuries" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px 32px; max-width: 500px;">
+                                        <label style="display: flex; align-items: center; gap: 8px;">
+                                          <input type="checkbox" name="customField.injury_type[]" value="Broken bones">
+                                          <span style="font-weight: bold; color: #0056a4;">Broken bones</span>
                                         </label>
-                                        <div style="color: #0056a4; font-size: 14px; margin-bottom: 12px;">
-                                          (Please check all that apply)
-                                        </div>
-                                      
-                                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px 32px; max-width: 500px;">
-                                    
-                                      
-                                          <label style="display: flex; align-items: center; gap: 8px;">
-                                            <input type="checkbox" style="width: 20px; height: 20px;">
-                                            <span style="font-weight: bold; color: #0056a4;">Broken bones</span>
-                                          </label>
-                                      
-                                      
-                                          <label style="display: flex; align-items: center; gap: 8px;">
-                                            <input type="checkbox" style="width: 20px; height: 20px;">
-                                            <span style="font-weight: bold; color: #0056a4;">Spinal cord injury or paralysis</span>
-                                          </label>
-                                      
-                                          <label style="display: flex; align-items: center; gap: 8px;">
-                                            <input type="checkbox" style="width: 20px; height: 20px;">
-                                            <span style="font-weight: bold; color: #0056a4;">Brain injury</span>
-                                          </label>
-                                      
-                                          <label style="display: flex; align-items: center; gap: 8px;">
-                                            <input type="checkbox" style="width: 20px; height: 20px;">
-                                            <span style="font-weight: bold; color: #0056a4;">Loss of life</span>
-                                          </label>
-                                        </div>
+                                        <label style="display: flex; align-items: center; gap: 8px;">
+                                          <input type="checkbox" name="customField.injury_type[]" value="Spinal cord injury or paralysis">
+                                          <span style="font-weight: bold; color: #0056a4;">Spinal cord injury or paralysis</span>
+                                        </label>
+                                        <label style="display: flex; align-items: center; gap: 8px;">
+                                          <input type="checkbox" name="customField.injury_type[]" value="Brain injury">
+                                          <span style="font-weight: bold; color: #0056a4;">Brain injury</span>
+                                        </label>
+                                        <label style="display: flex; align-items: center; gap: 8px;">
+                                          <input type="checkbox" name="customField.injury_type[]" value="Loss of life">
+                                          <span style="font-weight: bold; color: #0056a4;">Loss of life</span>
+                                        </label>
                                       </div>
-                                    <!-- Injury description -->
+                                    </div>
+                                
+                                    <!-- Injury Description -->
                                     <div style="grid-column: span 2;">
                                       <label>Please describe your injuries:</label><br>
-                                      <textarea required style="width: 100%; height: 100px; padding: 8px;" placeholder="Describe with your words..."></textarea>
+                                      <textarea name="customField.injury_description" id="injury_description" required style="width: 100%; height: 100px; padding: 8px;" placeholder="Describe with your words..."></textarea>
                                     </div>
                                   </div>
-                      
-                                  
-                              
+                                
+                                  <!-- Submit -->
                                   <div style="text-align: right; margin-top: 24px;">
                                     <button type="submit" style="background-color: red; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 4px;">
                                       Continue
                                     </button>
                                   </div>
                                 </form>
+                                
                               </div>
                         </div>
                       </div>
@@ -487,34 +488,81 @@
                 </div>
             </div>
         </section>
-        <script>
-            document.getElementById("contact-form").addEventListener("submit", function (e) {
-              e.preventDefault();
-          
-              const data = {
-                first_name: document.getElementById("first_name").value,
-                last_name: document.getElementById("last_name").value,
-                email: document.getElementById("email").value,
-                phone: document.getElementById("phone").value,
-                legal_need: document.getElementById("legal_need").value,
-                message: document.getElementById("message").value
-              };
-          
-              fetch("https://services.leadconnectorhq.com/hooks/pSqXKmlsGJfVWsxWt9iS/webhook-trigger/a6955d1e-61bd-4f5e-8f21-c5d4337b536a", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-              })
-              .then(res => {
-                if (res.ok) {
-                  alert("Form submitted successfully!");
-                  document.getElementById("contact-form").reset();
-                } else {
-                  alert("Submission failed. Please try again.");
-                }
-              });
-            });
-          </script>
+   <script>
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+  
+      // Helper to safely get value or empty string
+      const getVal = (id) => {
+        const el = document.getElementById(id);
+        return el ? el.value : "";
+      };
+  
+      const getSelectedYN = (groupLabel) => {
+        const group = document.querySelector(`[data-group="${groupLabel}"]`);
+        if (!group) return "";
+        const selected = group.querySelector(".yn-btn.selected");
+        return selected ? selected.textContent.trim() : "";
+      };
+  
+      const getCheckedInjuryTypes = () => {
+        const checkboxes = document.querySelectorAll('[name="injury_type[]"]:checked');
+        return Array.from(checkboxes).map(cb => cb.nextElementSibling?.textContent?.trim() || "").join(", ");
+      };
+      const urlParams = new URLSearchParams(window.location.search);
+      const zipCode = urlParams.get('zip');
+      const issue = urlParams.get('issue');
+      const data = {
+        first_name: getVal("name"),
+        last_name: getVal("last_name"),
+        email: getVal("email"),
+        phone: getVal("phone"),
+        zip: zipCode,
+        city: getVal("city"),
+        state: getVal("state"),
+  
+        "customField.date_of_incident": getVal("date_of_incident"),
+        "customField.injury_description": getVal("injury_description") || getVal("message"),
+        "customField.estimated_medical_bills": getVal("estimated_medical_bills"),
+        "customField.estimated_severity": getVal("estimated_severity"),
+        "customField.victim_relation": getVal("victim_relation"),
+        "customField.injury_types": getCheckedInjuryTypes(),
+  
+        "customField.attorney_helping": getSelectedYN("attorney_helping"),
+        "customField.employer_notified": getSelectedYN("employer_notified"),
+        "customField.federal_employee": getSelectedYN("federal_employee"),
+        "customField.hospitalization_due_to_accident": getSelectedYN("hospitalized_from_accident"),
+        "customField.can_identify_animal_owner": getSelectedYN("animal_owner_identifiable"),
+        "customField.lost_wages_or_medical_bills": getSelectedYN("lost_wages"),
+        "customField.missed_5_days_work": getSelectedYN("missed_work"),
+        "customField.injured_or_in_pain": getSelectedYN("injured_or_in_pain"),
+        "customField.insurance_coverage": getSelectedYN("insurance_coverage"),
+        "customField.your_fault_or_ticketed": getSelectedYN("at_fault_or_ticketed"),
+        "customField.hospitalized": getSelectedYN("hospitalized"),
+        "customField.nursing_home_injury": getSelectedYN("nursing_home_injury"),
+        "customField.diagnosed_by_doctor": getSelectedYN("diagnosed_by_doctor"),
+        "customField.legal_issue": issue,
+        "customField.other_legal_issue": getVal("other_legal_need")
+      };
+       console.log(data)
+      fetch("https://services.leadconnectorhq.com/hooks/pSqXKmlsGJfVWsxWt9iS/webhook-trigger/a6955d1e-61bd-4f5e-8f21-c5d4337b536a", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+      .then(res => {
+        if (res.ok) {
+          alert("Form submitted successfully!");
+          document.getElementById("contact-form").reset();
+          // Optionally redirect
+          // window.location.href = "thank-you.html";
+        } else {
+          alert("Submission failed. Please try again.");
+        }
+      })
+      .catch(() => alert("An error occurred. Please try again."));
+    });
+  </script>
           <script>
             document.getElementById("subscribe-form").addEventListener("submit", function (e) {
               e.preventDefault();

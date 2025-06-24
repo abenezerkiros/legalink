@@ -279,7 +279,7 @@
                                     </div>
                                 
                                     <div>
-                                      <label>First Name</label><br>
+                                      <label>Name</label><br>
                                       <input type="text" name="first_name" id="name" style="width: 100%; padding: 8px; color: black;" required>
                                 
                                       <label style="margin-top: 8px;">Email</label>
@@ -473,34 +473,81 @@
                 </div>
             </div>
         </section>
-        <script>
-            document.getElementById("contact-form").addEventListener("submit", function (e) {
-              e.preventDefault();
-          
-              const data = {
-                first_name: document.getElementById("first_name").value,
-                last_name: document.getElementById("last_name").value,
-                email: document.getElementById("email").value,
-                phone: document.getElementById("phone").value,
-                legal_need: document.getElementById("legal_need").value,
-                message: document.getElementById("message").value
-              };
-          
-              fetch("https://services.leadconnectorhq.com/hooks/pSqXKmlsGJfVWsxWt9iS/webhook-trigger/a6955d1e-61bd-4f5e-8f21-c5d4337b536a", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
-              })
-              .then(res => {
-                if (res.ok) {
-                  alert("Form submitted successfully!");
-                  document.getElementById("contact-form").reset();
-                } else {
-                  alert("Submission failed. Please try again.");
-                }
-              });
-            });
-          </script>
+   <script>
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+  
+      // Helper to safely get value or empty string
+      const getVal = (id) => {
+        const el = document.getElementById(id);
+        return el ? el.value : "";
+      };
+  
+      const getSelectedYN = (groupLabel) => {
+        const group = document.querySelector(`[data-group="${groupLabel}"]`);
+        if (!group) return "";
+        const selected = group.querySelector(".yn-btn.selected");
+        return selected ? selected.textContent.trim() : "";
+      };
+  
+      const getCheckedInjuryTypes = () => {
+        const checkboxes = document.querySelectorAll('[name="injury_type[]"]:checked');
+        return Array.from(checkboxes).map(cb => cb.nextElementSibling?.textContent?.trim() || "").join(", ");
+      };
+      const urlParams = new URLSearchParams(window.location.search);
+      const zipCode = urlParams.get('zip');
+      const issue = urlParams.get('issue');
+      const data = {
+        first_name: getVal("name"),
+        last_name: getVal("last_name"),
+        email: getVal("email"),
+        phone: getVal("phone"),
+        zip: zipCode,
+        city: getVal("city"),
+        state: getVal("state"),
+  
+        "customField.date_of_incident": getVal("date_of_incident"),
+        "customField.injury_description": getVal("injury_description") || getVal("message"),
+        "customField.estimated_medical_bills": getVal("estimated_medical_bills"),
+        "customField.estimated_severity": getVal("estimated_severity"),
+        "customField.victim_relation": getVal("victim_relation"),
+        "customField.injury_types": getCheckedInjuryTypes(),
+  
+        "customField.attorney_helping": getSelectedYN("attorney_helping"),
+        "customField.employer_notified": getSelectedYN("employer_notified"),
+        "customField.federal_employee": getSelectedYN("federal_employee"),
+        "customField.hospitalization_due_to_accident": getSelectedYN("hospitalized_from_accident"),
+        "customField.can_identify_animal_owner": getSelectedYN("animal_owner_identifiable"),
+        "customField.lost_wages_or_medical_bills": getSelectedYN("lost_wages"),
+        "customField.missed_5_days_work": getSelectedYN("missed_work"),
+        "customField.injured_or_in_pain": getSelectedYN("injured_or_in_pain"),
+        "customField.insurance_coverage": getSelectedYN("insurance_coverage"),
+        "customField.your_fault_or_ticketed": getSelectedYN("at_fault_or_ticketed"),
+        "customField.hospitalized": getSelectedYN("hospitalized"),
+        "customField.nursing_home_injury": getSelectedYN("nursing_home_injury"),
+        "customField.diagnosed_by_doctor": getSelectedYN("diagnosed_by_doctor"),
+        "customField.legal_issue": issue,
+        "customField.other_legal_issue": getVal("other_legal_need")
+      };
+       console.log(data)
+      fetch("https://services.leadconnectorhq.com/hooks/pSqXKmlsGJfVWsxWt9iS/webhook-trigger/a6955d1e-61bd-4f5e-8f21-c5d4337b536a", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+      .then(res => {
+        if (res.ok) {
+          alert("Form submitted successfully!");
+          document.getElementById("contact-form").reset();
+          // Optionally redirect
+          // window.location.href = "thank-you.html";
+        } else {
+          alert("Submission failed. Please try again.");
+        }
+      })
+      .catch(() => alert("An error occurred. Please try again."));
+    });
+  </script>
           <script>
             document.getElementById("subscribe-form").addEventListener("submit", function (e) {
               e.preventDefault();
