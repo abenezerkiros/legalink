@@ -207,11 +207,7 @@
           </div>
       
           <div id="header-sticky" class="header-1">
-              <div class="main-logo">
-                  <a href="index.html">
-                      <img src="assets/img/logo/logo.webp" loading="lazy" alt="logo-image">
-                  </a>
-              </div>
+
       
               <div class="countact-call">
                   <div class="icon">
@@ -295,12 +291,7 @@
                                     </div>
                                 
                                     <!-- Name + Email -->
-                                    <div>
-                                      <label>Name</label><br>
-                                      <input type="text" name="name" id="name" style="width: 100%; padding: 8px; color: black;" required>
-                                      <label>Email</label><br>
-                                      <input type="email" name="email" id="email" style="width: 100%; padding: 8px; color: black;" required>
-                                    </div>
+                          
                                 
                                     <!-- State and City -->
                                     <div>
@@ -435,9 +426,12 @@
                         <div class="col-xl-4 col-sm-6 col-md-6 col-lg-4 wow fadeInUp" data-wow-delay=".2s">
                             <div class="single-footer-widget">
                         
-                                <div class="footer-content">
+                                      <div class="footer-content">
+                                    <div class="widget-head">
+                                        <h4>Legal Disclaimer</h4>
+                                    </div>
                                     <p>
-                                        LegalLink360 helps you connect with trusted attorneys for any legal need — simple, fast, and free of stress.
+                                        LegalLink360 is a legal marketing and referral service, not a law firm. We do not provide legal advice. All intake forms and inquiries submitted to us are referred to licensed attorneys who are qualified to provide the appropriate legal counsel.
                                     </p>
                            <div class="social-icon">
                                 <a href="https://www.tiktok.com/@legallink360"><i class="fab fa-tiktok"></i></a>                           
@@ -535,11 +529,14 @@
       const urlParams = new URLSearchParams(window.location.search);
       const zipCode = urlParams.get('zip');
       const issue = urlParams.get('issue');
+      const email = urlParams.get('email');
+      const phone = urlParams.get('phone');
+      const name = urlParams.get('name');
       const data = {
-        first_name: getVal("name"),
+        first_name: name,
         last_name: getVal("last_name"),
-        email: getVal("email"),
-        phone: getVal("phone"),
+        email: email,
+        phone: phone,
         zip: zipCode,
         city: getVal("city"),
         state: getVal("state"),

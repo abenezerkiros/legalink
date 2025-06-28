@@ -207,11 +207,7 @@
           </div>
       
           <div id="header-sticky" class="header-1">
-              <div class="main-logo">
-                  <a href="index.html">
-                      <img src="assets/img/logo/logo.webp" loading="lazy" alt="logo-image">
-                  </a>
-              </div>
+
       
               <div class="countact-call">
                   <div class="icon">
@@ -294,13 +290,7 @@
                                       <input type="date" name="date_of_incident" id="date_of_incident" style="width: 100%; padding: 8px; color: black;" required>
                                     </div>
                                 
-                                    <div>
-                                      <label>Name</label><br>
-                                      <input type="text" name="first_name" id="name" style="width: 100%; padding: 8px; color: black;" required>
-                                
-                                      <label style="margin-top: 8px;">Email</label>
-                                      <input type="email" name="email" id="email" style="width: 100%; padding: 8px; color: black;" required>
-                                    </div>
+                           
                                 
                                     <!-- State and City -->
                                     <div>
@@ -411,9 +401,12 @@
                         <div class="col-xl-4 col-sm-6 col-md-6 col-lg-4 wow fadeInUp" data-wow-delay=".2s">
                             <div class="single-footer-widget">
                         
-                                <div class="footer-content">
+                                      <div class="footer-content">
+                                    <div class="widget-head">
+                                        <h4>Legal Disclaimer</h4>
+                                    </div>
                                     <p>
-                                        LegalLink360 helps you connect with trusted attorneys for any legal need — simple, fast, and free of stress.
+                                        LegalLink360 is a legal marketing and referral service, not a law firm. We do not provide legal advice. All intake forms and inquiries submitted to us are referred to licensed attorneys who are qualified to provide the appropriate legal counsel.
                                     </p>
                            <div class="social-icon">
                                 <a href="https://www.tiktok.com/@legallink360"><i class="fab fa-tiktok"></i></a>                           
@@ -487,81 +480,7 @@
                 </div>
             </div>
         </section>
-   <script>
-    document.getElementById("contact-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-  
-      // Helper to safely get value or empty string
-      const getVal = (id) => {
-        const el = document.getElementById(id);
-        return el ? el.value : "";
-      };
-  
-      const getSelectedYN = (groupLabel) => {
-        const group = document.querySelector(`[data-group="${groupLabel}"]`);
-        if (!group) return "";
-        const selected = group.querySelector(".yn-btn.selected");
-        return selected ? selected.textContent.trim() : "";
-      };
-  
-      const getCheckedInjuryTypes = () => {
-        const checkboxes = document.querySelectorAll('[name="injury_type[]"]:checked');
-        return Array.from(checkboxes).map(cb => cb.nextElementSibling?.textContent?.trim() || "").join(", ");
-      };
-      const urlParams = new URLSearchParams(window.location.search);
-      const zipCode = urlParams.get('zip');
-      const issue = urlParams.get('issue');
-      const data = {
-        first_name: getVal("name"),
-        last_name: getVal("last_name"),
-        email: getVal("email"),
-        phone: getVal("phone"),
-        zip: zipCode,
-        city: getVal("city"),
-        state: getVal("state"),
-  
-        "customField.date_of_incident": getVal("date_of_incident"),
-        "customField.injury_description": getVal("injury_description") || getVal("message"),
-        "customField.estimated_medical_bills": getVal("estimated_medical_bills"),
-        "customField.estimated_severity": getVal("estimated_severity"),
-        "customField.victim_relation": getVal("victim_relation"),
-        "customField.injury_types": getCheckedInjuryTypes(),
-  
-        "customField.attorney_helping": getSelectedYN("attorney_helping"),
-        "customField.employer_notified": getSelectedYN("employer_notified"),
-        "customField.federal_employee": getSelectedYN("federal_employee"),
-        "customField.hospitalization_due_to_accident": getSelectedYN("hospitalized_from_accident"),
-        "customField.can_identify_animal_owner": getSelectedYN("animal_owner_identifiable"),
-        "customField.lost_wages_or_medical_bills": getSelectedYN("lost_wages"),
-        "customField.missed_5_days_work": getSelectedYN("missed_work"),
-        "customField.injured_or_in_pain": getSelectedYN("injured_or_in_pain"),
-        "customField.insurance_coverage": getSelectedYN("insurance_coverage"),
-        "customField.your_fault_or_ticketed": getSelectedYN("at_fault_or_ticketed"),
-        "customField.hospitalized": getSelectedYN("hospitalized"),
-        "customField.nursing_home_injury": getSelectedYN("nursing_home_injury"),
-        "customField.diagnosed_by_doctor": getSelectedYN("diagnosed_by_doctor"),
-        "customField.legal_issue": issue,
-        "customField.other_legal_issue": getVal("other_legal_need")
-      };
-       console.log(data)
-      fetch("https://services.leadconnectorhq.com/hooks/pSqXKmlsGJfVWsxWt9iS/webhook-trigger/a6955d1e-61bd-4f5e-8f21-c5d4337b536a", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      })
-      .then(res => {
-        if (res.ok) {
-           window.location.href = 'thanks.html';
-          document.getElementById("contact-form").reset();
-          // Optionally redirect
-          // window.location.href = "thank-you.html";
-        } else {
-          alert("Submission failed. Please try again.");
-        }
-      })
-      .catch(() => alert("An error occurred. Please try again."));
-    });
-  </script>
+
           <script>
             document.getElementById("subscribe-form").addEventListener("submit", function (e) {
               e.preventDefault();
@@ -608,15 +527,20 @@
       const checkboxes = document.querySelectorAll('[name="injury_type[]"]:checked');
       return Array.from(checkboxes).map(cb => cb.nextElementSibling?.textContent?.trim() || "").join(", ");
     };
-
-    const data = {
-      first_name: getVal("name"),
-      last_name: getVal("last_name"),
-      email: getVal("email"),
-      phone: getVal("phone"),
-      zip: getVal("zip_code") || getVal("zip"),
-      city: getVal("city"),
-      state: getVal("state"),
+    const urlParams = new URLSearchParams(window.location.search);
+      const zipCode = urlParams.get('zip');
+      const issue = urlParams.get('issue');
+      const email = urlParams.get('email');
+      const phone = urlParams.get('phone');
+      const name = urlParams.get('name');
+      const data = {
+        first_name: name,
+        last_name: getVal("last_name"),
+        email: email,
+        phone: phone,
+        zip: zipCode,
+        city: getVal("city"),
+        state: getVal("state"),
 
       "customField.date_of_incident": getVal("date_of_incident"),
       "customField.injury_description": getVal("injury_description") || getVal("message"),
@@ -638,7 +562,7 @@
       "customField.hospitalized": getSelectedYN("hospitalized"),
       "customField.nursing_home_injury": getSelectedYN("nursing_home_injury"),
       "customField.diagnosed_by_doctor": getSelectedYN("diagnosed_by_doctor"),
-      "customField.legal_issue": getVal("legal_need"),
+      "customField.legal_issue": issue,
       "customField.other_legal_issue": getVal("other_legal_need")
     };
      console.log(data)
