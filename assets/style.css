@@ -3234,9 +3234,9 @@ ol {
 }
 .hero__content h1 {
   color: #fff;
-  max-inline-size: 45ch;
+
   margin-inline: auto;
-  font-size: 60px;
+  font-size: 70px;
 }
 .hero__content .text-lg {
   font-size: calc(1.35rem + 1.0285714286vw);

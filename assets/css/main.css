@@ -160,33 +160,33 @@ h6 {
 }
 
 h1 {
-  font-size: 90px;
+  font-size: 94px;
   font-weight: 400;
   line-height: 115%;
 }
 @media (max-width: 1399px) {
   h1 {
-    font-size: 75px;
+    font-size: 80px;
   }
 }
 @media (max-width: 1199px) {
   h1 {
-    font-size: 60px;
+    font-size: 65px;
   }
 }
 @media (max-width: 991px) {
   h1 {
-    font-size: 50px;
+    font-size: 55px;
   }
 }
 @media (max-width: 767px) {
   h1 {
-    font-size: 45px;
+    font-size: 50px;
   }
 }
 @media (max-width: 575px) {
   h1 {
-    font-size: 40px;
+    font-size: 45px;
   }
 }
 
