@@ -282,20 +282,15 @@
                                         
                                         <select name="legal_need" id="legal_need" class=" form-control" onchange="toggleOtherInput(this)" style="width: 100%; z-index: 999999;">
                                         <option value="" disabled selected>Select Legal Issue</option>
-                                        <option value="auto">Auto Accident</option>
-                                        <option value="motorcycle">Motorcycle Accident</option>
-                                        <option value="truck">Truck Accident</option>
-                                        <option value="mass">Mass Transit</option>
-                                        <option value="work">Work Accident</option>
-                                        <option value="dog">Dog Bite</option>
-                                        <option value="slip">Slip & Fall</option>
-                                        <option value="medical">Medical Malpractice</option>
-                                        <option value="asbestos">Asbestos / Mesothelioma</option>
-                                        <option value="nursing">Nursing Home Abuse</option>
-                                        <option value="mash">Transvaginal Mesh</option>
-                                        <option value="palsy">Cerebral Palsy</option>
-                                        <option value="birth">Birth Defect</option>
-                                        <option value="product">Product Liability</option>
+                                        <option value="auto">Personal Injury</option>
+                                        <option value="work">Employment Law</option>
+                                        <option value="family">Family Law</option>
+                                        <option value="criminal">Criminal Defense</option>
+                                        <option value="immigration">Immigration Law</option>
+
+                                        <option value="tenant">Landlord–Tenant & Housing Law</option>
+                                        <option value="work">Workers’ Compensation</option>
+                                        <option value="civil">Civil Rights & Discrimination</option>
                                         <option value="others">Others</option>
                                         </select>
                                       </div>
@@ -557,22 +552,16 @@
       // Define your redirect routes here
       const routes = {
         auto: 'auto.html',
-        motorcycle: 'motorcycle.html',
-        truck: 'truck.html',
         work: 'work.html',
-        dog: 'dog.html',
-        slip: 'book.html',
-        medical: 'malpractice.html',
-        asbestos: 'asbestos.html',
-        nursing: 'nursing.html',
-        mash: 'mash.html',
-        product: 'product.html',
-        birth: "birth.html",
-        palsy:"palsy.html",
+        family: 'Family.html',
+        criminal: 'Criminal.html',
+        immigration: 'immigration.html',
+        tenant: 'tenant.html',
+        civil: 'civil.html',
         others: 'other.html',
-        mass: "mass.html"
+
       };
-  
+
       const route = routes[legalNeed] || routes['others'];
   
       // Redirect with query parameters

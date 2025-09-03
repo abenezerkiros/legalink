@@ -182,7 +182,7 @@
                               contact@legallink360.com
                           </a>
                       </li>
-
+     
 
                   </ul>
                       <div class="top-right">
@@ -253,126 +253,140 @@
    
 
         <!-- appointment Section Start -->
-        <section class="appointment-section fix">
-            <div class="container">
-                <div class="appointment-wrapper">
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8"> <!-- Increased width from col-lg-6 to col-lg-8 -->
-                            <div style="max-width: 900px; margin: 0 auto; padding: 32px; font-family: sans-serif;">
-                                <h3 style="color: #0056a4;">Find out your legal options by connecting with a licensed attorney who can review your case.</h3>
-                                <p style="color: #0071c2; font-weight: bold;">It’s completely free with no cost or commitment.</p>
-                              
-                                <!-- Progress bar -->
-                                <div style="background-color: #ccc; border-radius: 20px; height: 20px; margin-bottom: 24px;">
-                                  <div style="width: 66%; background-color: #0056a4; height: 100%; border-radius: 20px;"></div>
-                                </div>
-                              
-                                <form id="contact-form">
-                                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-                                  
-                                      <!-- Date of Incident -->
-                                      <div>
-                                        <label>Date of Incident:</label><br>
-                                        <input type="date" name="customField.date_of_incident" id="date_of_incident" style="width: 100%; padding: 8px; color: black;" required>
-                                      </div>
-                                  
-                                      <!-- Name + Email -->
-                         
-                                  
-                                      <!-- State and City -->
-                                      <div>
-                                        <label>State where the injury occurred:</label><br>
-                                        <input type="text" name="customField.injury_state" id="injury_state" required style="width: 100%; padding: 8px; color: black;">
-                                        <label style="margin-top: 8px;">City where the injury occurred:</label>
-                                        <input type="text" name="customField.injury_city" id="injury_city" required style="width: 100%; padding: 8px; color: black;">
-                                      </div>
-                                  
-                                      <!-- Hospitalization -->
-                                      <div data-group="customField.hospitalized_from_accident">
-                                        <label>Did the accident cause hospitalization, medical treatment, surgery, or missed work?</label><br>
-                                        <button type="button" class="yn-btn" data-name="customField.hospitalized_from_accident" data-value="No">No</button>
-                                        <button type="button" class="yn-btn" data-name="customField.hospitalized_from_accident" data-value="Yes">Yes</button>
-                                      </div>
-                                  
-                                      <!-- Attorney -->
-                                      <div data-group="customField.attorney_helping">
-                                        <label>Is an attorney helping you with your case?</label><br>
-                                        <button type="button" class="yn-btn" data-name="customField.attorney_helping" data-value="No">No</button>
-                                        <button type="button" class="yn-btn" data-name="customField.attorney_helping" data-value="Yes">Yes</button>
-                                      </div>
-                                  
-                                      <!-- Estimated Medical Bills -->
-                                      <div>
-                                        <label>Estimated Medical Bills</label><br>
-                                        <input type="text" name="customField.estimated_medical_bills" id="estimated_medical_bills" required style="width: 100%; padding: 8px; color: black;">
-                                      </div>
-                                  
-                                      <!-- Estimated Severity -->
-                                      <div>
-                                        <label>Estimated severity of injury</label><br>
-                                        <select name="customField.estimated_severity" id="estimated_severity" required style="width: 100%; padding: 8px; color: black;">
-                                          <option value="">Select one</option>
-                                          <option value="No injury">No injury</option>
-                                          <option value="Minor injury">Minor injury</option>
-                                          <option value="Disfigurement or cosmetic injury">Disfigurement or cosmetic injury</option>
-                                          <option value="Short term loss of physical ability">Short term loss of physical ability</option>
-                                          <option value="Long term loss of physical injury">Long term loss of physical injury</option>
-                                          <option value="Possibility of future harm">Possibility of future harm</option>
-                                          <option value="Death of patient">Death of patient</option>
-                                        </select>
-                                      </div>
-                                  
-                                      <!-- Injury Types -->
-                                      <div style="font-family: sans-serif; margin-bottom: 20px;">
-                                        <label style="font-weight: bold; color: #0056a4; font-size: 16px;">
-                                          What types of injuries were sustained?
-                                        </label>
-                                        <div style="color: #0056a4; font-size: 14px; margin-bottom: 12px;">
-                                          (Please check all that apply)
-                                        </div>
-                                        <div id="injuries" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px 32px; max-width: 500px;">
-                                          <label style="display: flex; align-items: center; gap: 8px;">
-                                            <input type="checkbox" name="customField.injury_type[]" value="Broken bones">
-                                            <span style="font-weight: bold; color: #0056a4;">Broken bones</span>
-                                          </label>
-                                          <label style="display: flex; align-items: center; gap: 8px;">
-                                            <input type="checkbox" name="customField.injury_type[]" value="Spinal cord injury or paralysis">
-                                            <span style="font-weight: bold; color: #0056a4;">Spinal cord injury or paralysis</span>
-                                          </label>
-                                          <label style="display: flex; align-items: center; gap: 8px;">
-                                            <input type="checkbox" name="customField.injury_type[]" value="Brain injury">
-                                            <span style="font-weight: bold; color: #0056a4;">Brain injury</span>
-                                          </label>
-                                          <label style="display: flex; align-items: center; gap: 8px;">
-                                            <input type="checkbox" name="customField.injury_type[]" value="Loss of life">
-                                            <span style="font-weight: bold; color: #0056a4;">Loss of life</span>
-                                          </label>
-                                        </div>
-                                      </div>
-                                  
-                                      <!-- Injury Description -->
-                                      <div style="grid-column: span 2;">
-                                        <label>Please describe your injuries:</label><br>
-                                        <textarea name="customField.injury_description" id="injury_description" required style="width: 100%; height: 100px; padding: 8px;" placeholder="Describe with your words..."></textarea>
-                                      </div>
-                                  
-                                    </div>
-                                  
-                                    <div style="text-align: right; margin-top: 24px;">
-                                      <button type="submit" style="background-color: red; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 4px;">
-                                        Continue
-                                      </button>
-                                    </div>
-                                    <img src="./assets/img/7f765b07-4b80-4716-96a9-01d370a45739_removalai_preview.png" alt="Známe" style="width: 145px;"/>
-                                    <img src="./assets/img/080805a0-77da-454a-b0b4-d86dd1d87cf7_removalai_preview.png" alt="Známe" style="width: 145px;"/>
-                                  </form>
-                                  <small><i>By submitting, you acknowledge LegalLink360 is a legal marketing and referral service, not a law firm.</i></small>
-                              </div>
-                        </div>
+<!-- appointment Section Start -->
+<section class="appointment-section fix">
+  <div class="container">
+      <div class="appointment-wrapper">
+          <div class="row justify-content-center">
+              <div class="col-lg-8">
+                  <div style="max-width: 900px; margin: 0 auto; padding: 32px; font-family: sans-serif;">
+                      <h3 style="color: #0056a4;">Find Out Your Legal Options By Connecting With a Licensed Family Law Attorney Who Can Review Your Case</h3>
+                      <p style="color: #0071c2; font-weight: bold;">It's completely free with no cost or commitment.</p>
+                    
+                      <!-- Progress bar -->
+                      <div style="background-color: #ccc; border-radius: 20px; height: 20px; margin-bottom: 24px;">
+                          <div style="width: 66%; background-color: #0056a4; height: 100%; border-radius: 20px;"></div>
                       </div>
-                </div>
-            </div>
-        </section>
+                    
+                      <form id="contact-form">
+                          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                            
+                              <!-- Date of Issue / Incident -->
+                              <div>
+                                  <label>Date of Issue / Incident:</label><br>
+                                  <input type="date" name="customField.family_issue_date" id="family_issue_date" style="width: 100%; padding: 8px; color: black;" required>
+                              </div>
+                            
+                              <!-- State where issue occurred -->
+                              <div>
+                                  <label>State where issue occurred:</label><br>
+                                  <input type="text" name="customField.family_issue_state" id="family_issue_state" required style="width: 100%; padding: 8px; color: black;">
+                              </div>
+                            
+                              <!-- City where issue occurred -->
+                              <div>
+                                  <label>City where issue occurred:</label><br>
+                                  <input type="text" name="customField.family_issue_city" id="family_issue_city" required style="width: 100%; padding: 8px; color: black;">
+                              </div>
+                            
+                              <!-- Are you currently represented by an attorney? -->
+                              <div data-group="customField.family_represented_by_attorney">
+                                  <label>Are you currently represented by an attorney?</label><br>
+                                  <button type="button" class="yn-btn" data-name="customField.family_represented_by_attorney" data-value="No">No</button>
+                                  <button type="button" class="yn-btn" data-name="customField.family_represented_by_attorney" data-value="Yes">Yes</button>
+                              </div>
+                            
+                              <!-- Type of Family Law Matter -->
+                              <div style="grid-column: span 2;">
+                                  <label style="font-weight: bold; color: #0056a4; font-size: 16px;">
+                                      Type of Family Law Matter (check all that apply):
+                                  </label>
+                                  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px 32px; margin-top: 10px;">
+                                      <label style="display: flex; align-items: center; gap: 8px;">
+                                          <input type="checkbox" name="customField.family_matter_type[]" value="Divorce / Legal Separation">
+                                          <span style="font-weight: bold; color: #0056a4;">Divorce / Legal Separation</span>
+                                      </label>
+                                      <label style="display: flex; align-items: center; gap: 8px;">
+                                          <input type="checkbox" name="customField.family_matter_type[]" value="Child Custody">
+                                          <span style="font-weight: bold; color: #0056a4;">Child Custody</span>
+                                      </label>
+                                      <label style="display: flex; align-items: center; gap: 8px;">
+                                          <input type="checkbox" name="customField.family_matter_type[]" value="Child Support">
+                                          <span style="font-weight: bold; color: #0056a4;">Child Support</span>
+                                      </label>
+                                      <label style="display: flex; align-items: center; gap: 8px;">
+                                          <input type="checkbox" name="customField.family_matter_type[]" value="Spousal Support (Alimony)">
+                                          <span style="font-weight: bold; color: #0056a4;">Spousal Support (Alimony)</span>
+                                      </label>
+                                      <label style="display: flex; align-items: center; gap: 8px;">
+                                          <input type="checkbox" name="customField.family_matter_type[]" value="Domestic Violence / Protective Order">
+                                          <span style="font-weight: bold; color: #0056a4;">Domestic Violence / Protective Order</span>
+                                      </label>
+                                      <label style="display: flex; align-items: center; gap: 8px;">
+                                          <input type="checkbox" name="customField.family_matter_type[]" value="Adoption / Guardianship">
+                                          <span style="font-weight: bold; color: #0056a4;">Adoption / Guardianship</span>
+                                      </label>
+                                      <label style="display: flex; align-items: center; gap: 8px;">
+                                          <input type="checkbox" name="customField.family_matter_type[]" value="Property Division">
+                                          <span style="font-weight: bold; color: #0056a4;">Property Division</span>
+                                      </label>
+                                      <label style="display: flex; align-items: center; gap: 8px;">
+                                          <input type="checkbox" name="customField.family_matter_type[]" value="Other">
+                                          <span style="font-weight: bold; color: #0056a4;">Other (please specify)</span>
+                                      </label>
+                                  </div>
+                              </div>
+                            
+                              <!-- Other family matter specification -->
+                              <div style="grid-column: span 2;">
+                                  <label>If Other, please specify:</label><br>
+                                  <input type="text" name="customField.other_family_matter" id="other_family_matter" style="width: 100%; padding: 8px; color: black;">
+                              </div>
+                            
+                              <!-- Urgency of the Matter -->
+                              <div style="grid-column: span 2;">
+                                  <label style="font-weight: bold; color: #0056a4; font-size: 16px;">
+                                      Urgency of the Matter:
+                                  </label>
+                                  <div style="display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 10px;">
+                                      <label style="display: flex; align-items: center; gap: 8px;">
+                                          <input type="radio" name="customField.urgency" value="Immediate (court date soon / urgent safety issue)">
+                                          <span style="font-weight: bold; color: #0056a4;">Immediate (court date soon / urgent safety issue)</span>
+                                      </label>
+                                      <label style="display: flex; align-items: center; gap: 8px;">
+                                          <input type="radio" name="customField.urgency" value="Within the next 30 days">
+                                          <span style="font-weight: bold; color: #0056a4;">Within the next 30 days</span>
+                                      </label>
+                                      <label style="display: flex; align-items: center; gap: 8px;">
+                                          <input type="radio" name="customField.urgency" value="Exploring options / not urgent">
+                                          <span style="font-weight: bold; color: #0056a4;">Exploring options / not urgent</span>
+                                      </label>
+                                  </div>
+                              </div>
+                            
+                              <!-- Case details description -->
+                              <div style="grid-column: span 2;">
+                                  <label>Please describe your family law situation:</label><br>
+                                  <textarea name="customField.family_description" id="family_description"  style="width: 100%; height: 100px; padding: 8px;" placeholder="Describe your family law situation..."></textarea>
+                              </div>
+                            
+                          </div>
+                        
+                          <div style="text-align: right; margin-top: 24px;">
+                              <button type="submit" style="background-color: red; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 4px;">
+                                  Continue
+                              </button>
+                          </div>
+                          <img src="./assets/img/7f765b07-4b80-4716-96a9-01d370a45739_removalai_preview.png" alt="Známe" style="width: 145px;"/>
+                          <img src="./assets/img/080805a0-77da-454a-b0b4-d86dd1d87cf7_removalai_preview.png" alt="Známe" style="width: 145px;"/>
+                      </form>
+                      <small><i>By submitting, you acknowledge LegalLink360 is a legal marketing and referral service, not a law firm.</i></small>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</section>
 
         <!-- Map-section Start -->
     
@@ -484,84 +498,89 @@
                 </div>
             </div>
         </section>
-   <script>
-    document.getElementById("contact-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-  
-      // Helper to safely get value or empty string
-      const getVal = (id) => {
-        const el = document.getElementById(id);
-        return el ? el.value : "";
-      };
-  
-      const getSelectedYN = (groupLabel) => {
-        const group = document.querySelector(`[data-group="${groupLabel}"]`);
-        if (!group) return "";
-        const selected = group.querySelector(".yn-btn.selected");
-        return selected ? selected.textContent.trim() : "";
-      };
-  
-      const getCheckedInjuryTypes = () => {
-        const checkboxes = document.querySelectorAll('[name="injury_type[]"]:checked');
-        return Array.from(checkboxes).map(cb => cb.nextElementSibling?.textContent?.trim() || "").join(", ");
-      };
-      const urlParams = new URLSearchParams(window.location.search);
-      const zipCode = urlParams.get('zip');
-      const issue = urlParams.get('issue');
-      const email = urlParams.get('email');
-      const phone = urlParams.get('phone');
-      const name = urlParams.get('name');
-      const data = {
-        first_name: name,
-        last_name: getVal("last_name"),
-        email: email,
-        phone: phone,
-        zip: zipCode,
-        city: getVal("city"),
-        state: getVal("state"),
-  
-        "customField.date_of_incident": getVal("date_of_incident"),
-        "customField.injury_description": getVal("injury_description") || getVal("message"),
-        "customField.estimated_medical_bills": getVal("estimated_medical_bills"),
-        "customField.estimated_severity": getVal("estimated_severity"),
-        "customField.victim_relation": getVal("victim_relation"),
-        "customField.injury_types": getCheckedInjuryTypes(),
-  
-        "customField.attorney_helping": getSelectedYN("customField.attorney_helping"),
-        "customField.employer_notified": getSelectedYN("customField.employer_notified"),
-        "customField.federal_employee": getSelectedYN("fcustomField.ederal_employee"),
-        "customField.hospitalization_due_to_accident": getSelectedYN("customField.hospitalized_from_accident"),
-        "customField.can_identify_animal_owner": getSelectedYN("customField.animal_owner_identifiable"),
-        "customField.lost_wages_or_medical_bills": getSelectedYN("customField.lost_wages"),
-        "customField.missed_5_days_work": getSelectedYN("customField.missed_work"),
-        "customField.injured_or_in_pain": getSelectedYN("customField.injured_or_in_pain"),
-        "customField.insurance_coverage": getSelectedYN("customField.insurance_coverage"),
-        "customField.your_fault_or_ticketed": getSelectedYN("customField.at_fault_or_ticketed"),
-        "customField.hospitalized": getSelectedYN("customField.hospitalized"),
-        "customField.nursing_home_injury": getSelectedYN("customField.nursing_home_injury"),
-        "customField.diagnosed_by_doctor": getSelectedYN("customField.diagnosed_by_doctor"),
-        "customField.legal_issue": issue,
-        "customField.other_legal_issue": getVal("other_legal_need")
-      };
-       console.log(data)
-      fetch("https://services.leadconnectorhq.com/hooks/pSqXKmlsGJfVWsxWt9iS/webhook-trigger/a6955d1e-61bd-4f5e-8f21-c5d4337b536a", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data)
-      })
-      .then(res => {
-        if (res.ok) {
-           window.location.href = 'thanks.html';
-          document.getElementById("contact-form").reset();
-          // Optionally redirect
-          // window.location.href = "thank-you.html";
-        } else {
-          alert("Submission failed. Please try again.");
-        }
-      })
-      .catch(() => alert("An error occurred. Please try again."));
-    });
-  </script>
+        <script>
+          document.getElementById("contact-form").addEventListener("submit", function (e) {
+              e.preventDefault();
+      
+              // Helper to safely get value or empty string
+              const getVal = (id) => {
+                  const el = document.getElementById(id);
+                  return el ? el.value : "";
+              };
+      
+              const getSelectedYN = (groupLabel) => {
+                  const group = document.querySelector(`[data-group="${groupLabel}"]`);
+                  if (!group) return "";
+                  const selected = group.querySelector(".yn-btn.selected");
+                  return selected ? selected.textContent.trim() : "";
+              };
+      
+              const getSelectedRadio = (name) => {
+                  const selected = document.querySelector(`input[name="${name}"]:checked`);
+                  return selected ? selected.value : "";
+              };
+      
+              const getCheckedFamilyMatterTypes = () => {
+                  const checkboxes = document.querySelectorAll('[name="customField.family_matter_type[]"]:checked');
+                  return Array.from(checkboxes).map(cb => cb.value).join(", ");
+              };
+      
+              // Collect all form data into a description
+              const description = `
+      FAMILY LAW INTAKE SUMMARY:
+      Date of Issue/Incident: ${getVal("family_issue_date")}
+      State: ${getVal("family_issue_state")}
+      City: ${getVal("family_issue_city")}
+      Represented by attorney: ${getSelectedYN("customField.family_represented_by_attorney")}
+      Family matter types: ${getCheckedFamilyMatterTypes()}
+      Other family matter details: ${getVal("other_family_matter")}
+      Urgency: ${getSelectedRadio("customField.urgency")}
+      Family law situation description: ${getVal("family_description")}
+              `.trim();
+      
+              const urlParams = new URLSearchParams(window.location.search);
+              const zipCode = urlParams.get('zip');
+              const issue = urlParams.get('issue');
+              const email = urlParams.get('email');
+              const phone = urlParams.get('phone');
+              const name = urlParams.get('name');
+              
+              const data = {
+                  first_name: name,
+                  email: email,
+                  phone: phone,
+                  zip: zipCode,
+                  "customField.description": description,
+                  "customField.legal_issue": issue
+              };
+      
+              console.log(data);
+              
+              fetch("https://services.leadconnectorhq.com/hooks/pSqXKmlsGJfVWsxWt9iS/webhook-trigger/a6955d1e-61bd-4f5e-8f21-c5d4337b536a", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(data)
+              })
+              .then(res => {
+                  if (res.ok) {
+                      window.location.href = 'thanks.html';
+                      document.getElementById("contact-form").reset();
+                  } else {
+                      alert("Submission failed. Please try again.");
+                  }
+              })
+              .catch(() => alert("An error occurred. Please try again."));
+          });
+      
+          // Optional toggle behavior for Yes/No buttons
+          document.querySelectorAll('.yn-btn').forEach(btn => {
+              btn.addEventListener('click', () => {
+                  const group = btn.parentElement;
+                  group.querySelectorAll('.yn-btn').forEach(b => b.classList.remove('selected'));
+                  btn.classList.add('selected');
+              });
+          });
+      </script>
           <script>
             document.getElementById("subscribe-form").addEventListener("submit", function (e) {
               e.preventDefault();
