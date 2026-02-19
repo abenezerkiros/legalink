@@ -539,29 +539,68 @@
       .catch(() => alert("An error occurred. Please try again."));
     });
   </script>
-          <script>
-            document.getElementById("subscribe-form").addEventListener("submit", function (e) {
-              e.preventDefault();
-          
-              const email = document.getElementById("subscriber_email").value;
-          
-              fetch("https://services.leadconnectorhq.com/hooks/pSqXKmlsGJfVWsxWt9iS/webhook-trigger/1aded1b6-e5cb-468f-b903-3ca63870e907", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  subscriber_email: email
-                })
-              })
-              .then(res => {
-                if (res.ok) {
-                  alert("Subscribed successfully!");
-                  document.getElementById("subscribe-form").reset();
-                } else {
-                  alert("Something went wrong. Please try again.");
-                }
-              });
-            });
-          </script>
+<script>
+  document.getElementById("subscribe-form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    const email = document.getElementById("subscriber_email").value;
+
+    // HubSpot configuration
+    const HUBSPOT_PORTAL_ID = "243749777";
+    const HUBSPOT_FORM_ID = "4e61f95d-1a35-48aa-b9b6-9b566af8ae30";
+
+    // Prepare data for HubSpot
+    const hubspotData = {
+      fields: [
+        {
+          name: "email",
+          value: email
+        }
+      ],
+      context: {
+        pageUri: window.location.href,
+        pageName: document.title
+      },
+      legalConsentOptions: {
+        consent: {
+          consentToProcess: true,
+          text: "I agree to receive newsletters from LegalLink360",
+          communications: [
+            {
+              value: true,
+              subscriptionTypeId: 999,
+              text: "I agree to receive email newsletters"
+            }
+          ]
+        }
+      }
+    };
+
+    console.log("Subscribing to HubSpot:", hubspotData);
+
+    // Send to HubSpot only
+    fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(hubspotData)
+    })
+    .then(async response => {
+      if (response.ok) {
+        console.log("Successfully subscribed to HubSpot");
+        alert("Subscribed successfully!");
+        document.getElementById("subscribe-form").reset();
+      } else {
+        const errorText = await response.text();
+        console.error("HubSpot error:", errorText);
+        alert("Something went wrong. Please try again. Error: " + response.status);
+      }
+    })
+    .catch(error => {
+      console.error("Error subscribing to HubSpot:", error);
+      alert("An error occurred. Please try again.");
+    });
+  });
+</script>
           <script>
             // Optional toggle behavior
             document.querySelectorAll('.yn-btn').forEach(btn => {

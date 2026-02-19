@@ -488,108 +488,213 @@
             </div>
         </section>
         <script>
-          document.getElementById("contact-form").addEventListener("submit", function (e) {
-              e.preventDefault();
-      
-              // Helper to safely get value or empty string
-              const getVal = (id) => {
-                  const el = document.getElementById(id);
-                  return el ? el.value : "";
-              };
-      
-              const getSelectedYN = (groupLabel) => {
-                  const group = document.querySelector(`[data-group="${groupLabel}"]`);
-                  if (!group) return "";
-                  const selected = group.querySelector(".yn-btn.selected");
-                  return selected ? selected.textContent.trim() : "";
-              };
-      
-              const getCheckedChargeTypes = () => {
-                  const checkboxes = document.querySelectorAll('[name="customField.charge_type[]"]:checked');
-                  return Array.from(checkboxes).map(cb => cb.value).join(", ");
-              };
-      
-              // Collect all form data into a description
-              const description = `
-      CRIMINAL DEFENSE INTAKE SUMMARY:
-      Date of Arrest/Incident: ${getVal("date_of_arrest")}
-      State: ${getVal("arrest_state")}
-      City: ${getVal("arrest_city")}
-      Charged with crime: ${getSelectedYN("customField.charged_with_crime")}
-      Currently in custody: ${getSelectedYN("customField.in_custody")}
-      Prior criminal record: ${getSelectedYN("customField.prior_criminal_record")}
-      Currently represented by attorney: ${getSelectedYN("customField.represented_by_attorney")}
-      Charge types: ${getCheckedChargeTypes()}
-      Other charge details: ${getVal("other_charge")}
+            document.getElementById("contact-form").addEventListener("submit", function (e) {
+                e.preventDefault();
+            
+                // Helper functions
+                const getVal = (id) => {
+                    const el = document.getElementById(id);
+                    return el ? el.value : "";
+                };
+            
+                // Get selected Yes/No values and update hidden inputs
+                document.querySelectorAll('[data-group]').forEach(group => {
+                    const selected = group.querySelector('.yn-btn.selected');
+                    const hiddenInput = group.querySelector('input[type="hidden"]');
+                    if (selected && hiddenInput) {
+                        hiddenInput.value = selected.textContent.trim();
+                    }
+                });
+            
+                const getCheckedChargeTypes = () => {
+    const checkboxes = document.querySelectorAll('[name="customField.charge_type[]"]:checked');
+    return Array.from(checkboxes).map(cb => cb.value).join(", ");
+};
 
-              `.trim();
-      
-              const urlParams = new URLSearchParams(window.location.search);
-              const zipCode = urlParams.get('zip');
-              const issue = urlParams.get('issue');
-              const email = urlParams.get('email');
-              const phone = urlParams.get('phone');
-              const name = urlParams.get('name');
-              
-              const data = {
-                  first_name: name,
-                  email: email,
-                  phone: phone,
-                  zip: zipCode,
-                  "customField.description": description,
-                  "customField.legal_issue": issue
-              };
-      
-              console.log(data);
-              
-              fetch("https://services.leadconnectorhq.com/hooks/pSqXKmlsGJfVWsxWt9iS/webhook-trigger/a6955d1e-61bd-4f5e-8f21-c5d4337b536a", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify(data)
-              })
-              .then(res => {
-                  if (res.ok) {
-                      window.location.href = 'thanks.html';
-                      document.getElementById("contact-form").reset();
-                  } else {
-                      alert("Submission failed. Please try again.");
-                  }
-              })
-              .catch(() => alert("An error occurred. Please try again."));
-          });
-      
-          // Optional toggle behavior for Yes/No buttons
-          document.querySelectorAll('.yn-btn').forEach(btn => {
-              btn.addEventListener('click', () => {
-                  const group = btn.parentElement;
-                  group.querySelectorAll('.yn-btn').forEach(b => b.classList.remove('selected'));
-                  btn.classList.add('selected');
-              });
-          });
-      </script>
+            
+                // Get values from URL parameters
+                const urlParams = new URLSearchParams(window.location.search);
+                const zipCode = urlParams.get('zip') || '';
+                const issue = urlParams.get('issue') || '';
+                const email = urlParams.get('email') || '';
+                const phone = urlParams.get('phone') || '';
+                const name = urlParams.get('name') || '';
+                const getYNVal = (groupName) => {
+  const group = document.querySelector(`[data-group="${groupName}"]`);
+  const selected = group ? group.querySelector('.yn-btn.selected') : null;
+  return selected ? selected.dataset.value : '';
+};
+
+                // Build detailed description with all form fields
+                const fullDescription = `
+          CRIMINAL DEFENSE INTAKE SUMMARY
+          ===============================
+          Date of Arrest/Incident: ${getVal("date_of_arrest")}
+          State of Arrest: ${getVal("arrest_state")}
+          City of Arrest: ${getVal("arrest_city")}
+          Charged with crime: ${getYNVal("customField.charged_with_crime")}
+          Currently in custody: ${getYNVal("customField.in_custody")}
+          Prior criminal record: ${getYNVal("customField.prior_criminal_record")}
+          Currently represented by attorney: ${getYNVal("customField.represented_by_attorney")}
+          Charge types selected: ${getCheckedChargeTypes()}
+          Other charge details: ${getVal("other_charge")}
+                `.trim();
+                
+                // HubSpot configuration - REPLACE THESE WITH YOUR ACTUAL VALUES
+                const HUBSPOT_PORTAL_ID = "243749777"; // Get this from HubSpot settings
+                const HUBSPOT_FORM_ID = "19ec2722-3ab4-4cc2-8eb4-f48473dc2ab4"; // Get this from your form URL
+                
+                // Prepare data for HubSpot
+                const hubspotData = {
+                    fields: [
+                        {
+                            name: "firstname",
+                            value: name
+                        },
+                        {
+                            name: "email",
+                            value: email
+                        },
+                        {
+                            name: "phone",
+                            value: phone
+                        },
+                        {
+                            name: "zip",
+                            value: zipCode
+                        },
+                        {
+                            name: "legal_issue",
+                            value: issue || "Criminal Defense"
+                        },
+                        {
+                            name: "description_of_issue",
+                            value: fullDescription
+                        }
+                    ],
+                    context: {
+                        pageUri: window.location.href,
+                        pageName: document.title
+                    },
+                    legalConsentOptions: {
+                        consent: {
+                            consentToProcess: true,
+                            text: "I agree to be contacted by LegalLink360",
+                            communications: [
+                                {
+                                    value: true,
+                                    subscriptionTypeId: 999,
+                                    text: "I agree to receive communications about my legal case"
+                                }
+                            ]
+                        }
+                    }
+                };
+            
+                console.log("Submitting to HubSpot:", hubspotData);
+                
+                // Send to HubSpot only
+                fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(hubspotData)
+                })
+                .then(async response => {
+                    if (response.ok) {
+                        console.log("Successfully submitted to HubSpot");
+                        window.location.href = 'thanks.html';
+                        document.getElementById("contact-form").reset();
+                    } else {
+                        const errorText = await response.text();
+                        console.error("HubSpot error:", errorText);
+                        alert("Submission failed. Please try again. Error: " + response.status);
+                    }
+                })
+                .catch(error => {
+                    console.error("Error submitting to HubSpot:", error);
+                    alert("An error occurred. Please try again.");
+                });
+            });
+            
+            // Yes/No button toggle functionality
+            document.querySelectorAll('.yn-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const group = this.closest('[data-group]');
+                    group.querySelectorAll('.yn-btn').forEach(b => b.classList.remove('selected'));
+                    this.classList.add('selected');
+                    
+                    // Update the hidden input
+                    const hiddenInput = group.querySelector('input[type="hidden"]');
+                    if (hiddenInput) {
+                        hiddenInput.value = this.textContent.trim();
+                    }
+                });
+            });
+          </script>
+          
           <script>
             document.getElementById("subscribe-form").addEventListener("submit", function (e) {
               e.preventDefault();
           
               const email = document.getElementById("subscriber_email").value;
           
-              fetch("https://services.leadconnectorhq.com/hooks/pSqXKmlsGJfVWsxWt9iS/webhook-trigger/1aded1b6-e5cb-468f-b903-3ca63870e907", {
+              // HubSpot configuration
+              const HUBSPOT_PORTAL_ID = "243749777";
+              const HUBSPOT_FORM_ID = "4e61f95d-1a35-48aa-b9b6-9b566af8ae30";
+          
+              // Prepare data for HubSpot
+              const hubspotData = {
+                fields: [
+                  {
+                    name: "email",
+                    value: email
+                  }
+                ],
+                context: {
+                  pageUri: window.location.href,
+                  pageName: document.title
+                },
+                legalConsentOptions: {
+                  consent: {
+                    consentToProcess: true,
+                    text: "I agree to receive newsletters from LegalLink360",
+                    communications: [
+                      {
+                        value: true,
+                        subscriptionTypeId: 999,
+                        text: "I agree to receive email newsletters"
+                      }
+                    ]
+                  }
+                }
+              };
+          
+              console.log("Subscribing to HubSpot:", hubspotData);
+          
+              // Send to HubSpot only
+              fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  subscriber_email: email
-                })
+                body: JSON.stringify(hubspotData)
               })
-              .then(res => {
-                if (res.ok) {
+              .then(async response => {
+                if (response.ok) {
+                  console.log("Successfully subscribed to HubSpot");
                   alert("Subscribed successfully!");
                   document.getElementById("subscribe-form").reset();
                 } else {
-                  alert("Something went wrong. Please try again.");
+                  const errorText = await response.text();
+                  console.error("HubSpot error:", errorText);
+                  alert("Something went wrong. Please try again. Error: " + response.status);
                 }
+              })
+              .catch(error => {
+                console.error("Error subscribing to HubSpot:", error);
+                alert("An error occurred. Please try again.");
               });
             });
           </script>
+
           <script>
             // Optional toggle behavior
             document.querySelectorAll('.yn-btn').forEach(btn => {

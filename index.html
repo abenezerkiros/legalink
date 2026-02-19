@@ -471,12 +471,13 @@
                     <!-- Video Section - Full width on mobile -->
                     <div class="col-12 order-1 order-lg-2">
                         <div class="newsletter-video" style="position: relative; padding-bottom: 75%; height: 0; overflow: hidden; border-radius: 12px; border: 3px solid rgba(184, 134, 11, 0.3); margin-bottom: 25px;">
-                            <iframe src="https://www.youtube.com/embed/YUTEm8GJNZ4?feature=shared" 
+                            <iframe src="https://www.youtube.com/embed/8rGaXvvG1k8" 
                                     style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" 
                                     title="How LegalLink360 Works" 
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                     allowfullscreen></iframe>
                         </div>
+                        
                     </div>
                     
                     <!-- Content Section -->
@@ -610,20 +611,59 @@
           
               const email = document.getElementById("subscriber_email").value;
           
-              fetch("https://services.leadconnectorhq.com/hooks/pSqXKmlsGJfVWsxWt9iS/webhook-trigger/1aded1b6-e5cb-468f-b903-3ca63870e907", {
+              // HubSpot configuration
+              const HUBSPOT_PORTAL_ID = "243749777";
+              const HUBSPOT_FORM_ID = "4e61f95d-1a35-48aa-b9b6-9b566af8ae30";
+          
+              // Prepare data for HubSpot
+              const hubspotData = {
+                fields: [
+                  {
+                    name: "email",
+                    value: email
+                  }
+                ],
+                context: {
+                  pageUri: window.location.href,
+                  pageName: document.title
+                },
+                legalConsentOptions: {
+                  consent: {
+                    consentToProcess: true,
+                    text: "I agree to receive newsletters from LegalLink360",
+                    communications: [
+                      {
+                        value: true,
+                        subscriptionTypeId: 999,
+                        text: "I agree to receive email newsletters"
+                      }
+                    ]
+                  }
+                }
+              };
+          
+              console.log("Subscribing to HubSpot:", hubspotData);
+          
+              // Send to HubSpot only
+              fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  subscriber_email: email
-                })
+                body: JSON.stringify(hubspotData)
               })
-              .then(res => {
-                if (res.ok) {
+              .then(async response => {
+                if (response.ok) {
+                  console.log("Successfully subscribed to HubSpot");
                   alert("Subscribed successfully!");
                   document.getElementById("subscribe-form").reset();
                 } else {
-                  alert("Something went wrong. Please try again.");
+                  const errorText = await response.text();
+                  console.error("HubSpot error:", errorText);
+                  alert("Something went wrong. Please try again. Error: " + response.status);
                 }
+              })
+              .catch(error => {
+                console.error("Error subscribing to HubSpot:", error);
+                alert("An error occurred. Please try again.");
               });
             });
           </script>

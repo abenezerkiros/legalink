@@ -492,53 +492,160 @@
             document.getElementById("contact-form").addEventListener("submit", function (e) {
               e.preventDefault();
           
-              const data = {
-                first_name: document.getElementById("first_name").value,
-                last_name: document.getElementById("last_name").value,
-                email: document.getElementById("email").value,
-                phone: document.getElementById("phone").value,
-                legal_need: document.getElementById("legal_need").value,
-                message: document.getElementById("message").value
+              // Get form values
+              const firstName = document.getElementById("first_name").value;
+              const lastName = document.getElementById("last_name").value;
+              const email = document.getElementById("email").value;
+              const phone = document.getElementById("phone").value;
+              const legalNeed = document.getElementById("legal_need").value;
+              const message = document.getElementById("message").value;
+          
+              // Build description with all form fields
+              const fullDescription = `
+          CONTACT FORM SUBMISSION
+          =======================
+          Legal Need: ${legalNeed}
+          Message: ${message}
+              `.trim();
+          
+              // HubSpot configuration
+              const HUBSPOT_PORTAL_ID = "243749777";
+              const HUBSPOT_FORM_ID = "19ec2722-3ab4-4cc2-8eb4-f48473dc2ab4";
+          
+              // Prepare data for HubSpot
+              const hubspotData = {
+                fields: [
+                  {
+                    name: "firstname",
+                    value: firstName
+                  },
+                  {
+                    name: "lastname",
+                    value: lastName
+                  },
+                  {
+                    name: "email",
+                    value: email
+                  },
+                  {
+                    name: "phone",
+                    value: phone
+                  },
+                  {
+                    name: "legal_issue",
+                    value: legalNeed
+                  },
+                  {
+                    name: "description",
+                    value: fullDescription
+                  }
+                ],
+                context: {
+                  pageUri: window.location.href,
+                  pageName: document.title
+                },
+                legalConsentOptions: {
+                  consent: {
+                    consentToProcess: true,
+                    text: "I agree to be contacted by LegalLink360",
+                    communications: [
+                      {
+                        value: true,
+                        subscriptionTypeId: 999,
+                        text: "I agree to receive communications about my legal case"
+                      }
+                    ]
+                  }
+                }
               };
           
-              fetch("https://services.leadconnectorhq.com/hooks/pSqXKmlsGJfVWsxWt9iS/webhook-trigger/a6955d1e-61bd-4f5e-8f21-c5d4337b536a", {
+              console.log("Submitting to HubSpot:", hubspotData);
+          
+              // Send to HubSpot only
+              fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(data)
+                body: JSON.stringify(hubspotData)
               })
-              .then(res => {
-                if (res.ok) {
-                   window.location.href = 'thanks.html';
+              .then(async response => {
+                if (response.ok) {
+                  console.log("Successfully submitted to HubSpot");
+                  window.location.href = 'thanks.html';
                   document.getElementById("contact-form").reset();
                 } else {
-                  alert("Submission failed. Please try again.");
+                  const errorText = await response.text();
+                  console.error("HubSpot error:", errorText);
+                  alert("Submission failed. Please try again. Error: " + response.status);
                 }
-              });
-            });
-          </script>
-          <script>
-            document.getElementById("subscribe-form").addEventListener("submit", function (e) {
-              e.preventDefault();
-          
-              const email = document.getElementById("subscriber_email").value;
-          
-              fetch("https://services.leadconnectorhq.com/hooks/pSqXKmlsGJfVWsxWt9iS/webhook-trigger/1aded1b6-e5cb-468f-b903-3ca63870e907", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({
-                  subscriber_email: email
-                })
               })
-              .then(res => {
-                if (res.ok) {
-                  alert("Subscribed successfully!");
-                  document.getElementById("subscribe-form").reset();
-                } else {
-                  alert("Something went wrong. Please try again.");
-                }
+              .catch(error => {
+                console.error("Error submitting to HubSpot:", error);
+                alert("An error occurred. Please try again.");
               });
             });
           </script>
+<script>
+    document.getElementById("subscribe-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+  
+      const email = document.getElementById("subscriber_email").value;
+  
+      // HubSpot configuration
+      const HUBSPOT_PORTAL_ID = "243749777";
+      const HUBSPOT_FORM_ID = "4e61f95d-1a35-48aa-b9b6-9b566af8ae30";
+  
+      // Prepare data for HubSpot
+      const hubspotData = {
+        fields: [
+          {
+            name: "email",
+            value: email
+          }
+        ],
+        context: {
+          pageUri: window.location.href,
+          pageName: document.title
+        },
+        legalConsentOptions: {
+          consent: {
+            consentToProcess: true,
+            text: "I agree to receive newsletters from LegalLink360",
+            communications: [
+              {
+                value: true,
+                subscriptionTypeId: 999,
+                text: "I agree to receive email newsletters"
+              }
+            ]
+          }
+        }
+      };
+  
+      console.log("Subscribing to HubSpot:", hubspotData);
+  
+      // Send to HubSpot only
+      fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(hubspotData)
+      })
+      .then(async response => {
+        if (response.ok) {
+          console.log("Successfully subscribed to HubSpot");
+          alert("Subscribed successfully!");
+          document.getElementById("subscribe-form").reset();
+        } else {
+          const errorText = await response.text();
+          console.error("HubSpot error:", errorText);
+          alert("Something went wrong. Please try again. Error: " + response.status);
+        }
+      })
+      .catch(error => {
+        console.error("Error subscribing to HubSpot:", error);
+        alert("An error occurred. Please try again.");
+      });
+    });
+  </script>
           
         <!--<< All JS Plugins >>-->
         <script src="assets/js/jquery-3.7.1.min.js"></script>
