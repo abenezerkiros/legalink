@@ -85,7 +85,7 @@
               ],
               "contactPoint": {
                 "@type": "ContactPoint",
-                "telephone": "+1 855-554-1827",
+                "telephone": "+1-877-711-1732",
                 "contactType": "customer service"
               }
             }
@@ -174,7 +174,7 @@
                         <ul class="top-left">
                             <li>
                                 <i class="fa-sharp fa-regular fa-phone"></i>
-                                <a href="tel:1 855-554-1827">1 855-554-1827</a>
+                                <a href="tel:1-877-711-1732">1-877-711-1732</a>
                             </li>
                             <li>
                                 <i class="fa-solid fa-envelope"></i>
@@ -431,7 +431,7 @@
                                 </div>
                                 <div class="contact-info">
                                     <h6>
-                                        <a href="tel:1 855-554-1827">1 855-554-1827</a><br>
+                                        <a href="tel:1-877-711-1732">1-877-711-1732</a><br>
                                         <a>contact@legallink360.com</a>
                                     </h6>
                                 </div>
@@ -457,194 +457,107 @@
                 </div>
             </div>
         </section>
-        <script>
-          document.getElementById("contact-form").addEventListener("submit", function (e) {
-            e.preventDefault();
-        
-            // Helper to safely get value or empty string
-            const getVal = (id) => {
-              const el = document.getElementById(id);
-              return el ? el.value : "";
-            };
-        
-            // Updated Yes/No getter to match working pattern
-            const getYNVal = (groupName) => {
-              const group = document.querySelector(`[data-group="${groupName}"]`);
-              const selected = group ? group.querySelector('.yn-btn.selected') : null;
-              return selected ? selected.dataset.value : '';
-            };
-        
-            // Get values from URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const zipCode = urlParams.get('zip') || '';
-            const issue = urlParams.get('issue') || '';
-            const email = urlParams.get('email') || '';
-            const phone = urlParams.get('phone') || '';
-            const name = urlParams.get('name') || '';
-        
-            // Build comprehensive description with ALL form fields
-            const fullDescription = `
-        PERSONAL INJURY INTAKE SUMMARY
-        ==============================
-        Date of Incident: ${getVal("date_of_incident")}
-        State where injury occurred: ${getVal("injury_state")}
-        City where injury occurred: ${getVal("injury_city")}
-        Injury Description: ${getVal("injury_description")}
-        
-        Lost wages or medical bills: ${getYNVal("customField.lost_wages_or_bills")}
-        Missed 5+ days of work: ${getYNVal("customField.missed_5_days_work")}
-        Attorney currently helping: ${getYNVal("customField.attorney_helping")}
-        Employer notified: ${getYNVal("customField.employer_notified")}
-        Federal employee: ${getYNVal("customField.federal_employee")}
-            `.trim();
-        
-            // HubSpot configuration
-            const HUBSPOT_PORTAL_ID = "243749777";
-            const HUBSPOT_FORM_ID = "19ec2722-3ab4-4cc2-8eb4-f48473dc2ab4";
-        
-            // Prepare data for HubSpot - ONLY fields that exist in your form
-            const hubspotData = {
-              fields: [
-                {
-                  name: "firstname",
-                  value: name
-                },
-                {
-                  name: "email",
-                  value: email
-                },
-                {
-                  name: "phone",
-                  value: phone
-                },
-                {
-                  name: "zip",
-                  value: zipCode
-                },
-                {
-                  name: "legal_issue",
-                  value: issue || "Personal Injury"
-                },
-                {
-                  name: "description_of_issue",
-                  value: fullDescription
-                }
-              ],
-              context: {
-                pageUri: window.location.href,
-                pageName: document.title
-              },
-              legalConsentOptions: {
-                consent: {
-                  consentToProcess: true,
-                  text: "I agree to be contacted by LegalLink360",
-                  communications: [
-                    {
-                      value: true,
-                      subscriptionTypeId: 999,
-                      text: "I agree to receive communications about my legal case"
-                    }
-                  ]
-                }
-              }
-            };
-        
-            console.log("Submitting to HubSpot:", hubspotData);
-        
-            // Send to HubSpot only
-            fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`, {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(hubspotData)
-            })
-            .then(async response => {
-              if (response.ok) {
-                console.log("Successfully submitted to HubSpot");
-                window.location.href = 'thanks.html';
-                document.getElementById("contact-form").reset();
-              } else {
-                const errorText = await response.text();
-                console.error("HubSpot error:", errorText);
-                alert("Submission failed. Please try again. Error: " + response.status);
-              }
-            })
-            .catch(error => {
-              console.error("Error submitting to HubSpot:", error);
-              alert("An error occurred. Please try again.");
-            });
-          });
-        
-          // Yes/No button toggle functionality - UPDATED to use data-value
-          document.querySelectorAll('.yn-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-              const group = this.closest('[data-group]');
-              group.querySelectorAll('.yn-btn').forEach(b => b.classList.remove('selected'));
-              this.classList.add('selected');
-            });
-          });
-        </script>
-<script>
-  document.getElementById("subscribe-form").addEventListener("submit", function (e) {
-    e.preventDefault();
-
-    const email = document.getElementById("subscriber_email").value;
-
-    // HubSpot configuration
-    const HUBSPOT_PORTAL_ID = "243749777";
-    const HUBSPOT_FORM_ID = "4e61f95d-1a35-48aa-b9b6-9b566af8ae30";
-
-    // Prepare data for HubSpot
-    const hubspotData = {
-      fields: [
-        {
-          name: "email",
-          value: email
+   <script>
+    document.getElementById("contact-form").addEventListener("submit", function (e) {
+      e.preventDefault();
+  
+      // Helper to safely get value or empty string
+      const getVal = (id) => {
+        const el = document.getElementById(id);
+        return el ? el.value : "";
+      };
+  
+      const getSelectedYN = (groupLabel) => {
+        const group = document.querySelector(`[data-group="${groupLabel}"]`);
+        if (!group) return "";
+        const selected = group.querySelector(".yn-btn.selected");
+        return selected ? selected.textContent.trim() : "";
+      };
+  
+      const getCheckedInjuryTypes = () => {
+        const checkboxes = document.querySelectorAll('[name="injury_type[]"]:checked');
+        return Array.from(checkboxes).map(cb => cb.nextElementSibling?.textContent?.trim() || "").join(", ");
+      };
+      const urlParams = new URLSearchParams(window.location.search);
+      const zipCode = urlParams.get('zip');
+      const issue = urlParams.get('issue');
+      const email = urlParams.get('email');
+      const phone = urlParams.get('phone');
+      const name = urlParams.get('name');
+      const data = {
+        first_name: name,
+        last_name: getVal("last_name"),
+        email: email,
+        phone: phone,
+        zip: zipCode,
+        city: getVal("city"),
+        state: getVal("state"),
+  
+        "customField.date_of_incident": getVal("date_of_incident"),
+        "customField.injury_description": getVal("injury_description") || getVal("message"),
+        "customField.estimated_medical_bills": getVal("estimated_medical_bills"),
+        "customField.estimated_severity": getVal("estimated_severity"),
+        "customField.victim_relation": getVal("victim_relation"),
+        "customField.injury_types": getCheckedInjuryTypes(),
+  
+        "customField.attorney_helping": getSelectedYN("customField.attorney_helping"),
+        "customField.employer_notified": getSelectedYN("customField.employer_notified"),
+        "customField.federal_employee": getSelectedYN("customField.federal_employee"),
+        "customField.hospitalization_due_to_accident": getSelectedYN("customField.hospitalized_from_accident"),
+        "customField.can_identify_animal_owner": getSelectedYN("customField.animal_owner_identifiable"),
+        "customField.lost_wages_or_medical_bills": getSelectedYN("customField.lost_wages"),
+        "customField.missed_5_days_work": getSelectedYN("customField.missed_work"),
+        "customField.injured_or_in_pain": getSelectedYN("customField.injured_or_in_pain"),
+        "customField.insurance_coverage": getSelectedYN("customField.insurance_coverage"),
+        "customField.your_fault_or_ticketed": getSelectedYN("customField.at_fault_or_ticketed"),
+        "customField.hospitalized": getSelectedYN("customField.hospitalized"),
+        "customField.nursing_home_injury": getSelectedYN("customField.nursing_home_injury"),
+        "customField.diagnosed_by_doctor": getSelectedYN("customField.diagnosed_by_doctor"),
+        "customField.legal_issue": issue,
+        "customField.other_legal_issue": getVal("other_legal_need")
+      };
+       console.log(data)
+      fetch("https://services.leadconnectorhq.com/hooks/d6zx3g9MEmM84y8o4uCI/webhook-trigger/b692a0b0-87cd-4977-8de1-8e63e4bbefec", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+      })
+      .then(res => {
+        if (res.ok) {
+           window.location.href = 'thanks.html';
+          document.getElementById("contact-form").reset();
+          // Optionally redirect
+          // window.location.href = "thank-you.html";
+        } else {
+          alert("Submission failed. Please try again.");
         }
-      ],
-      context: {
-        pageUri: window.location.href,
-        pageName: document.title
-      },
-      legalConsentOptions: {
-        consent: {
-          consentToProcess: true,
-          text: "I agree to receive newsletters from LegalLink360",
-          communications: [
-            {
-              value: true,
-              subscriptionTypeId: 999,
-              text: "I agree to receive email newsletters"
-            }
-          ]
-        }
-      }
-    };
-
-    console.log("Subscribing to HubSpot:", hubspotData);
-
-    // Send to HubSpot only
-    fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(hubspotData)
-    })
-    .then(async response => {
-      if (response.ok) {
-        console.log("Successfully subscribed to HubSpot");
-        alert("Subscribed successfully!");
-        document.getElementById("subscribe-form").reset();
-      } else {
-        const errorText = await response.text();
-        console.error("HubSpot error:", errorText);
-        alert("Something went wrong. Please try again. Error: " + response.status);
-      }
-    })
-    .catch(error => {
-      console.error("Error subscribing to HubSpot:", error);
-      alert("An error occurred. Please try again.");
+      })
+      .catch(() => alert("An error occurred. Please try again."));
     });
-  });
-</script>
+  </script>
+          <script>
+            document.getElementById("subscribe-form").addEventListener("submit", function (e) {
+              e.preventDefault();
+          
+              const email = document.getElementById("subscriber_email").value;
+          
+              fetch("https://services.leadconnectorhq.com/hooks/d6zx3g9MEmM84y8o4uCI/webhook-trigger/fbedb484-5bdf-4014-9f5a-70a5c008110d", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  subscriber_email: email
+                })
+              })
+              .then(res => {
+                if (res.ok) {
+                  alert("Subscribed successfully!");
+                  document.getElementById("subscribe-form").reset();
+                } else {
+                  alert("Something went wrong. Please try again.");
+                }
+              });
+            });
+          </script>
           <script>
             // Optional toggle behavior
             document.querySelectorAll('.yn-btn').forEach(btn => {

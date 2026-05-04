@@ -85,7 +85,7 @@
               ],
               "contactPoint": {
                 "@type": "ContactPoint",
-                "telephone": "+1 855-554-1827",
+                "telephone": "+1-877-711-1732",
                 "contactType": "customer service"
               }
             }
@@ -174,7 +174,7 @@
                     <ul class="top-left">
                       <li>
                           <i class="fa-sharp fa-regular fa-phone"></i>
-                          <a href="tel:1 855-554-1827">1 855-554-1827</a>
+                          <a href="tel:1-877-711-1732">1-877-711-1732</a>
                       </li>
                       <li>
                           <i class="fa-solid fa-envelope"></i>
@@ -457,7 +457,7 @@
                                 </div>
                                 <div class="contact-info">
                                     <h6>
-                                        <a href="tel:1 855-554-1827">1 855-554-1827</a><br>
+                                        <a href="tel:1-877-711-1732">1-877-711-1732</a><br>
                                         <a>contact@legallink360.com</a>
                                     </h6>
                                 </div>
@@ -484,200 +484,107 @@
             </div>
         </section>
         <script>
-            document.getElementById("contact-form").addEventListener("submit", function (e) {
+          document.getElementById("contact-form").addEventListener("submit", function (e) {
               e.preventDefault();
-          
+      
               // Helper to safely get value or empty string
               const getVal = (id) => {
-                const el = document.getElementById(id);
-                return el ? el.value : "";
+                  const el = document.getElementById(id);
+                  return el ? el.value : "";
               };
-          
-              // Updated Yes/No getter to match working pattern
-              const getYNVal = (groupName) => {
-                const group = document.querySelector(`[data-group="${groupName}"]`);
-                const selected = group ? group.querySelector('.yn-btn.selected') : null;
-                return selected ? selected.dataset.value : '';
+      
+              const getSelectedYN = (groupLabel) => {
+                  const group = document.querySelector(`[data-group="${groupLabel}"]`);
+                  if (!group) return "";
+                  const selected = group.querySelector(".yn-btn.selected");
+                  return selected ? selected.textContent.trim() : "";
               };
-          
+      
               const getCheckedImmigrationIssueTypes = () => {
-                const checkboxes = document.querySelectorAll('[name="customField.immigration_issue_type[]"]:checked');
-                return Array.from(checkboxes).map(cb => cb.value).join(", ");
+                  const checkboxes = document.querySelectorAll('[name="customField.immigration_issue_type[]"]:checked');
+                  return Array.from(checkboxes).map(cb => cb.value).join(", ");
               };
-          
-              // Get values from URL parameters
-              const urlParams = new URLSearchParams(window.location.search);
-              const zipCode = urlParams.get('zip') || '';
-              const issue = urlParams.get('issue') || '';
-              const email = urlParams.get('email') || '';
-              const phone = urlParams.get('phone') || '';
-              const name = urlParams.get('name') || '';
-          
-              // Build comprehensive description with ALL form fields
-              const fullDescription = `
-          IMMIGRATION LAW INTAKE SUMMARY
-          ==============================
-          Date of Immigration Issue/Filing: ${getVal("immigration_issue_date")}
-          Country of Origin: ${getVal("country_of_origin")}
-          Current Immigration Status: ${getVal("current_immigration_status")}
-          
-          Filed petitions before: ${getYNVal("customField.filed_petitions_before")}
-          Has immigration attorney: ${getYNVal("customField.has_immigration_attorney")}
-          Upcoming hearings/deadlines: ${getYNVal("customField.upcoming_hearings")}
-          
-          Immigration issue types: ${getCheckedImmigrationIssueTypes()}
-          Other immigration issue details: ${getVal("other_immigration_issue")}
-          
-          Immigration situation description: ${getVal("immigration_description")}
+      
+              // Collect all form data into a description
+              const description = `
+      IMMIGRATION LAW INTAKE SUMMARY:
+      Date of Immigration Issue/Filing: ${getVal("immigration_issue_date")}
+      Country of Origin: ${getVal("country_of_origin")}
+      Current Immigration Status: ${getVal("current_immigration_status")}
+      Filed petitions before: ${getSelectedYN("customField.filed_petitions_before")}
+      Has immigration attorney: ${getSelectedYN("customField.has_immigration_attorney")}
+      Upcoming hearings/deadlines: ${getSelectedYN("customField.upcoming_hearings")}
+      Immigration issue types: ${getCheckedImmigrationIssueTypes()}
+      Other immigration issue details: ${getVal("other_immigration_issue")}
+      Immigration situation description: ${getVal("immigration_description")}
               `.trim();
-          
-              // HubSpot configuration
-              const HUBSPOT_PORTAL_ID = "243749777";
-              const HUBSPOT_FORM_ID = "19ec2722-3ab4-4cc2-8eb4-f48473dc2ab4";
-          
-              // Prepare data for HubSpot
-              const hubspotData = {
-                fields: [
-                  {
-                    name: "firstname",
-                    value: name
-                  },
-                  {
-                    name: "email",
-                    value: email
-                  },
-                  {
-                    name: "phone",
-                    value: phone
-                  },
-                  {
-                    name: "zip",
-                    value: zipCode
-                  },
-                  {
-                    name: "legal_issue",
-                    value: issue || "Immigration Law"
-                  },
-                  {
-                    name: "description_of_issue",
-                    value: fullDescription
-                  }
-                ],
-                context: {
-                  pageUri: window.location.href,
-                  pageName: document.title
-                },
-                legalConsentOptions: {
-                  consent: {
-                    consentToProcess: true,
-                    text: "I agree to be contacted by LegalLink360",
-                    communications: [
-                      {
-                        value: true,
-                        subscriptionTypeId: 999,
-                        text: "I agree to receive communications about my legal case"
-                      }
-                    ]
-                  }
-                }
+      
+              const urlParams = new URLSearchParams(window.location.search);
+              const zipCode = urlParams.get('zip');
+              const issue = urlParams.get('issue');
+              const email = urlParams.get('email');
+              const phone = urlParams.get('phone');
+              const name = urlParams.get('name');
+              
+              const data = {
+                  first_name: name,
+                  email: email,
+                  phone: phone,
+                  zip: zipCode,
+                  "customField.description": description,
+                  "customField.legal_issue": issue
               };
+      
+              console.log(data);
+              
+              fetch("https://services.leadconnectorhq.com/hooks/d6zx3g9MEmM84y8o4uCI/webhook-trigger/b692a0b0-87cd-4977-8de1-8e63e4bbefec", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify(data)
+              })
+              .then(res => {
+                  if (res.ok) {
+                      window.location.href = 'thanks.html';
+                      document.getElementById("contact-form").reset();
+                  } else {
+                      alert("Submission failed. Please try again.");
+                  }
+              })
+              .catch(() => alert("An error occurred. Please try again."));
+          });
+      
+          // Optional toggle behavior for Yes/No buttons
+          document.querySelectorAll('.yn-btn').forEach(btn => {
+              btn.addEventListener('click', () => {
+                  const group = btn.parentElement;
+                  group.querySelectorAll('.yn-btn').forEach(b => b.classList.remove('selected'));
+                  btn.classList.add('selected');
+              });
+          });
+      </script>
+          <script>
+            document.getElementById("subscribe-form").addEventListener("submit", function (e) {
+              e.preventDefault();
           
-              console.log("Submitting to HubSpot:", hubspotData);
+              const email = document.getElementById("subscriber_email").value;
           
-              // Send to HubSpot only
-              fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`, {
+              fetch("https://services.leadconnectorhq.com/hooks/d6zx3g9MEmM84y8o4uCI/webhook-trigger/fbedb484-5bdf-4014-9f5a-70a5c008110d", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(hubspotData)
+                body: JSON.stringify({
+                  subscriber_email: email
+                })
               })
-              .then(async response => {
-                if (response.ok) {
-                  console.log("Successfully submitted to HubSpot");
-                  window.location.href = 'thanks.html';
-                  document.getElementById("contact-form").reset();
+              .then(res => {
+                if (res.ok) {
+                  alert("Subscribed successfully!");
+                  document.getElementById("subscribe-form").reset();
                 } else {
-                  const errorText = await response.text();
-                  console.error("HubSpot error:", errorText);
-                  alert("Submission failed. Please try again. Error: " + response.status);
+                  alert("Something went wrong. Please try again.");
                 }
-              })
-              .catch(error => {
-                console.error("Error submitting to HubSpot:", error);
-                alert("An error occurred. Please try again.");
-              });
-            });
-          
-            // Yes/No button toggle functionality - UPDATED to use data-value
-            document.querySelectorAll('.yn-btn').forEach(btn => {
-              btn.addEventListener('click', function() {
-                const group = this.closest('[data-group]');
-                group.querySelectorAll('.yn-btn').forEach(b => b.classList.remove('selected'));
-                this.classList.add('selected');
               });
             });
           </script>
- <script>
-    document.getElementById("subscribe-form").addEventListener("submit", function (e) {
-      e.preventDefault();
-  
-      const email = document.getElementById("subscriber_email").value;
-  
-      // HubSpot configuration
-      const HUBSPOT_PORTAL_ID = "243749777";
-      const HUBSPOT_FORM_ID = "4e61f95d-1a35-48aa-b9b6-9b566af8ae30";
-  
-      // Prepare data for HubSpot
-      const hubspotData = {
-        fields: [
-          {
-            name: "email",
-            value: email
-          }
-        ],
-        context: {
-          pageUri: window.location.href,
-          pageName: document.title
-        },
-        legalConsentOptions: {
-          consent: {
-            consentToProcess: true,
-            text: "I agree to receive newsletters from LegalLink360",
-            communications: [
-              {
-                value: true,
-                subscriptionTypeId: 999,
-                text: "I agree to receive email newsletters"
-              }
-            ]
-          }
-        }
-      };
-  
-      console.log("Subscribing to HubSpot:", hubspotData);
-  
-      // Send to HubSpot only
-      fetch(`https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(hubspotData)
-      })
-      .then(async response => {
-        if (response.ok) {
-          console.log("Successfully subscribed to HubSpot");
-          alert("Subscribed successfully!");
-          document.getElementById("subscribe-form").reset();
-        } else {
-          const errorText = await response.text();
-          console.error("HubSpot error:", errorText);
-          alert("Something went wrong. Please try again. Error: " + response.status);
-        }
-      })
-      .catch(error => {
-        console.error("Error subscribing to HubSpot:", error);
-        alert("An error occurred. Please try again.");
-      });
-    });
-  </script>
           <script>
             // Optional toggle behavior
             document.querySelectorAll('.yn-btn').forEach(btn => {
